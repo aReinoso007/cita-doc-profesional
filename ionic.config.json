@@ -1,0 +1,7 @@
+{
+  "name": "CitaDoc-Profesional",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
