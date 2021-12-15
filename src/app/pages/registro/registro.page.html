@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar color="danger">
+    <ion-title>Registro</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="danger">
+  <ion-item color="danger">
+    <ion-label position="floating">Nombre</ion-label>
+    <ion-input [(ngModel)]="medico.nombre" type="text" required></ion-input>
+  </ion-item>
+  <ion-item color="danger">
+    <ion-label position="floating">Apellido</ion-label>
+    <ion-input [(ngModel)]="medico.apellido" type="text" required></ion-input>
+  </ion-item>
+
+  <ion-item color="danger">
+    <ion-label position="floating">E-mail</ion-label>
+    <ion-input [(ngModel)]="medico.email" type="text" required></ion-input>
+  </ion-item>
+
+  <ion-item color="danger">
+    <ion-label position="floating">Contraseña</ion-label>
+    <ion-input [(ngModel)]="medico.password" type="text" required></ion-input>
+  </ion-item>
+
+  <ion-item color="danger">
+    <ion-label position="floating">Confirmar Contraseña</ion-label>
+    <ion-input [(ngModel)]="confirmar_contrasena" type="text" required></ion-input>
+  </ion-item>
+
+  <ion-button class="ion-margin-top" type="submit" expand="block" color="light" (click)="onSubmit()">
+    Crear Cuenta
+  </ion-button>
+
+  <ion-item color="danger" class="ion-text-center">
+    <ion-label>O</ion-label>
+  </ion-item>
+
+  <ion-button color="dark" expand="block" fill="outline" [routerLink]="['/login']">Login</ion-button>
+</ion-content>
