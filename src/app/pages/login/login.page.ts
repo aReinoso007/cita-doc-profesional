@@ -1,4 +1,8 @@
+import { Login } from './../../model/login.model';
+import { TokenService } from './../../service/token.service';
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/service/auth.service';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -6,10 +10,45 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-
-  constructor() { }
+  login: Login;
+  email = '';
+  password ='';
+  errMessage ='';
+  constructor(
+    private authService: AuthService,
+    private tokenService: TokenService,
+    private toastController: ToastController
+  ) { }
 
   ngOnInit() {
+  }
+
+  onLogin(){
+    this.login = new Login(this.email, this.password);
+    this.authService.login(this.login).subscribe(
+      data=>{
+        console.log('data', data);
+        console.log('dataToken: ',data.token);
+        this.tokenService.setToken(data.token);
+      },
+      err=>{
+        this.errMessage = err.error.message;
+        this.presentToast();
+      }
+    )
+  }
+
+  vaciar(){
+
+  }
+
+  async presentToast() {
+    const toast = await this.toastController.create({
+      message: this.errMessage,
+      duration: 2000,
+      position:'middle'
+    });
+    toast.present();
   }
 
 }

@@ -11,8 +11,21 @@ const routes: Routes = [
       {
         path: 'cuenta',
         loadChildren: () => import('./cuenta/cuenta.module').then( m => m.CuentaPageModule)
+      },
+      {
+        path: 'dashboard',
+        loadChildren: () => import('./dashboard/dashboard.module').then( m => m.DashboardPageModule)
+      },
+      {
+        path: '',
+        redirectTo: '/tabs/dashboard',
+        pathMatch: 'full'
       }
     ]
+  },
+  {
+    path: 'dashboard',
+    loadChildren: () => import('./dashboard/dashboard.module').then( m => m.DashboardPageModule)
   },
   
 ];
