@@ -1,32 +1,22 @@
-import { FormControl, FormGroup } from '@angular/forms';
+import {ValidatorFn, AbstractControl } from '@angular/forms';
 
 export class PasswordValidator {
 
-  static areEqual(formGroup: FormGroup) {
-    let val;
-    let valid = true;
+  static match(controlName: string, checkControlName: string): ValidatorFn {
+    return (controls: AbstractControl) => {
+      const control = controls.get(controlName);
+      const checkControl = controls.get(checkControlName);
 
-    for (let key in formGroup.controls) {
-      if (formGroup.controls.hasOwnProperty(key)) {
-        let control: FormControl = <FormControl>formGroup.controls[key];
-
-        if (val === undefined) {
-          val = control.value
-        } else {
-          if (val !== control.value) {
-            valid = false;
-            break;
-          }
-        }
+      if (checkControl.errors && !checkControl.errors.matching) {
+        return null;
       }
-    }
 
-    if (valid) {
-      return null;
-    }
-
-    return {
-      areEqual: true
+      if (control.value !== checkControl.value) {
+        controls.get(checkControlName).setErrors({ matching: true });
+        return { matching: true };
+      } else {
+        return null;
+      }
     };
   }
 }

@@ -1,41 +1,110 @@
 <ion-header>
-  <ion-toolbar color="danger">
-    <ion-title>Registro</ion-title>
+  <ion-toolbar color="primary">
+    <ion-title> Registro </ion-title>
   </ion-toolbar>
 </ion-header>
+<ion-content color="light">
+  <swiper #swiper [config]="config" [pagination]="{ clickable: true }" [navigation]="{ prevEl: '.swiper-navigation-prev', nextEl: '.swiper-navigation-next'}">
+    <ng-template swiperSlide >
+      <form [formGroup]="signupForm" (ngSubmit)="onSubmit1()">
+        <ion-item>
+          <ion-label position="floating">Nombre</ion-label>
+          <ion-input formControlName="nombre" type="text"  [(ngModel)]="medico.nombre"></ion-input>
+        </ion-item>
+        <span class="error ion-padding" *ngIf="submitted1 && errCtrl1.nombre.errors?.required" color="danger">
+          Campo Nombre es requerido.
+        </span>
+        <ion-item>
+          <ion-label position="floating">Apellido</ion-label>
+          <ion-input formControlName="apellido" type="text" [(ngModel)]="medico.apellido"></ion-input>
+        </ion-item>
+        <span class="error ion-padding" *ngIf="submitted1 && errCtrl1.apellido.errors?.required" color="danger">
+          Campo Apellido es requerido.
+        </span>
+        <ion-item>
+          <ion-label position="floating">Username</ion-label>
+          <ion-input formControlName="username" type="text" [(ngModel)]="medico.username"></ion-input>
+        </ion-item>
+        <span class="error ion-padding" *ngIf="submitted1 && errCtrl1.username.errors?.required" color="danger">
+          Campo Username es requerido.
+        </span>
+        <ion-item>
+          <ion-label position="floating">E-mail</ion-label>
+          <ion-input formControlName="email" type="email" [(ngModel)]="medico.email" required></ion-input>
+        </ion-item>
+        <span class="error ion-padding" *ngIf="submitted1 && errCtrl1.email.errors?.required" color="danger">
+          Campo Email es requerido.
+        </span>
+        <span class="error ion-padding" *ngIf="submitted1 && errCtrl1.email.errors?.email" color="danger">
+          Formato de email no valido.
+        </span>
+        <ion-item>
+          <ion-label position="floating">Email recuperacion</ion-label>
+          <ion-input formControlName="recoveryEmail" [(ngModel)]="medico.recoveryEmail"></ion-input>
+        </ion-item>
+        <span class="error ion-padding" *ngIf="submitted1 && errCtrl1.recoveryEmail.errors?.required" color="danger">
+          Campo Email recuperacion es requerido.
+        </span>
+        <span class="error ion-padding" *ngIf="submitted1 && errCtrl1.recoveryEmail.errors?.email" color="danger">
+          Formato de email no valido.
+        </span>
+        <ion-item>
+          <ion-label position="floating">Password</ion-label>
+          <ion-input formControlName="password" type="password" [(ngModel)]="medico.password" required></ion-input>
+        </ion-item>
+        <span class="error ion-padding" *ngIf="submitted1 && errCtrl1.password.errors?.required" color="danger">
+          Campo Password es requerido.
+        </span>
+        <span class="error ion-padding" *ngIf="submitted1 && errCtrl1.password.errors?.minLength" color="danger">
+          Password debe ser mayor a 8 caracteres
+        </span>
+        <span class="error ion-padding" *ngIf="submitted1 && errCtrl1.password.errors?.pattern" color="danger">
+          Debe incluir numeros y al menos una mayuscula
+        </span>
 
-<ion-content color="danger">
-  <ion-item color="danger">
-    <ion-label position="floating">Nombre</ion-label>
-    <ion-input [(ngModel)]="medico.nombre" type="text" required></ion-input>
-  </ion-item>
-  <ion-item color="danger">
-    <ion-label position="floating">Apellido</ion-label>
-    <ion-input [(ngModel)]="medico.apellido" type="text" required></ion-input>
-  </ion-item>
-
-  <ion-item color="danger">
-    <ion-label position="floating">E-mail</ion-label>
-    <ion-input [(ngModel)]="medico.email" type="text" required></ion-input>
-  </ion-item>
-
-  <ion-item color="danger">
-    <ion-label position="floating">Contraseña</ion-label>
-    <ion-input [(ngModel)]="medico.password" type="text" required></ion-input>
-  </ion-item>
-
-  <ion-item color="danger">
-    <ion-label position="floating">Confirmar Contraseña</ion-label>
-    <ion-input [(ngModel)]="confirmar_contrasena" type="text" required></ion-input>
-  </ion-item>
-
-  <ion-button class="ion-margin-top" type="submit" expand="block" color="light" (click)="onSubmit()">
-    Crear Cuenta
-  </ion-button>
-
-  <ion-item color="danger" class="ion-text-center">
-    <ion-label>O</ion-label>
-  </ion-item>
-
-  <ion-button color="dark" expand="block" fill="outline" [routerLink]="['/login']">Login</ion-button>
+        <ion-row>
+          <ion-col>
+            <ion-button type="submit" color="danger" expand="block">Siguiente</ion-button>
+          </ion-col>
+        </ion-row>
+      </form>
+    </ng-template>
+    <ng-template swiperSlide>
+      <form [formGroup]="signupForm2" (ngSubmit)="onSubmit2()">
+        <ion-item>
+          <ion-label position="floating">Profesion</ion-label>
+          <ion-input formControlName="profesion" type="text" [(ngModel)]="medico.profesion"></ion-input>
+        </ion-item>
+        <span class="error ion-padding" *ngIf="submitted2 && errCtrl2.profesion.errors?.required" color="danger">
+          Campo profesion es requerido
+        </span>
+        <ion-item>
+          <ion-label position="floating">Descripcion</ion-label>
+          <ion-input formControlName="descripcion" type="text"  [(ngModel)]="medico.descripcion"></ion-input>
+        </ion-item>
+        <span class="error ion-padding" *ngIf="submitted2 && errCtrl2.descripcion.errors?.required" color="danger">
+          Campo descripcion es requerido
+        </span>
+        <ion-item>
+          <ion-label position="floating">Numero Contacto</ion-label>
+          <ion-input formControlName="numeroContacto" type="number" [(ngModel)]="medico.numeroContacto"></ion-input>
+        </ion-item>
+        <span class="error ion-padding" *ngIf="submitted2 && errCtrl2.numeroContacto.errors?.required" color="danger">
+          Campo Numero Contacto es requerido
+        </span>
+        <ion-item>
+          <ion-label position="floating">Slogan</ion-label>
+          <ion-input formControlName="slogan" type="text" [(ngModel)]="medico.slogan" required></ion-input>
+        </ion-item>
+        <span class="error ion-padding" *ngIf="submitted2 && errCtrl2.slogan.errors?.required" color="danger">
+          Campo Slogan es requerido
+        </span>
+        <ion-row>
+          <ion-col>
+            <ion-button type="submit" color="danger" expand="block">Registrar</ion-button>
+          </ion-col>
+        </ion-row>
+      </form>
+    </ng-template>
+  </swiper>
 </ion-content>

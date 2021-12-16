@@ -1,0 +1,13 @@
+@import "~swiper/scss";
+@import "~@ionic/angular/css/ionic-swiper";
+
+.swiper {
+  width: 100%;
+  height: 100%;
+}
+.swiper-slides {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}

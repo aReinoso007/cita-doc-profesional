@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { Login } from './../model/login.model';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Medico } from '../model/medico.model';
 
 
 
@@ -16,6 +17,10 @@ export class AuthService {
 
   public login(login: Login): Observable<Jwt>{
     return this.http.post<Jwt>(this.authURL+'medico_login',login);
+  }
+
+  public signUp(medico: Medico): Observable<any>{
+    return this.http.post(this.authURL+'medico_registro', medico);
   }
 
 }
