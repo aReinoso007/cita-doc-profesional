@@ -17,33 +17,13 @@ SwiperCore.use([Pagination, Navigation])
 export class RegistroPage implements OnInit{
 
   @ViewChild('swiper') swiper: SwiperComponent; 
+  @ViewChild('passwordEyeRegister') passwordEye;
   config: SwiperOptions = {
     slidesPerView: 1,
     pagination: true
   }; 
-  cP ='';
-  error_messages = {
-    'nombre': [
-      { type: 'required', message: 'Nombre es requerido' },
-    ],
-
-    'apellido': [
-      { type: 'required', message: 'Last Name is required.' }
-    ],
-
-    'email': [
-      { type: 'required', message: 'Email is required.' },
-      { type: 'minlength', message: 'Email length.' },
-      { type: 'maxlength', message: 'Email length.' },
-      { type: 'required', message: 'please enter a valid email address.' }
-    ],
-
-    'password': [
-      { type: 'required', message: 'password is required.' },
-      { type: 'minlength', message: 'password length.' },
-      { type: 'maxlength', message: 'password length.' }
-    ]
-  }
+  passwordTypeInput  =  'password';
+  iconpassword  =  'eye-off';
 
   signupForm: FormGroup;
   signupForm2: FormGroup;
@@ -122,6 +102,12 @@ export class RegistroPage implements OnInit{
         alert(message);
       })
     }
-  }  
+  } 
+  
+  togglePasswordMode() {
+    this.passwordTypeInput  =  this.passwordTypeInput  ===  'text'  ?  'password'  :  'text';
+    this.iconpassword  =  this.iconpassword  ===  'eye-off'  ?  'eye'  :  'eye-off';
+    this.passwordEye.el.setFocus();
+}
 
 }
