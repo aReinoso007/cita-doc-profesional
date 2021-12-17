@@ -27,11 +27,37 @@ const routes: Routes = [
         ]
       },
       {
+        path: 'historial',
+        children: [
+          {
+            path: '',
+            loadChildren: () => import ('../tabs/historial/historial.module').then(m=> m.HistorialPageModule)
+          }
+        ]
+      },
+      {
+        path: 'horario',
+        children: [
+          {
+            path: '',
+            loadChildren: () => import ('../tabs/horarios/horarios.module').then(m=> m.HorariosPageModule)
+          }
+        ]
+      },
+      {
         path: '',
         redirectTo: '/tabs/dashboard',
         pathMatch: 'full'
       }
     ]
+  },
+  {
+    path: 'horarios',
+    loadChildren: () => import('./horarios/horarios.module').then( m => m.HorariosPageModule)
+  },
+  {
+    path: 'historial',
+    loadChildren: () => import('./historial/historial.module').then( m => m.HistorialPageModule)
   }
 ];
 @NgModule({
