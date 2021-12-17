@@ -7,14 +7,24 @@ const routes: Routes = [
   {
     path: '',
     component: TabsPage,
-    children:[
+    children: [
       {
         path: 'cuenta',
-        loadChildren: () => import('./cuenta/cuenta.module').then( m => m.CuentaPageModule)
+        children: [
+          {
+            path: '',
+            loadChildren: () => import ('../tabs/cuenta/cuenta.module').then(m=> m.CuentaPageModule)
+          }
+        ]
       },
       {
         path: 'dashboard',
-        loadChildren: () => import('./dashboard/dashboard.module').then( m => m.DashboardPageModule)
+        children: [
+          {
+            path: '',
+            loadChildren: () => import ('../tabs/dashboard/dashboard.module').then(m=> m.DashboardPageModule)
+          }
+        ]
       },
       {
         path: '',
@@ -22,14 +32,8 @@ const routes: Routes = [
         pathMatch: 'full'
       }
     ]
-  },
-  {
-    path: 'dashboard',
-    loadChildren: () => import('./dashboard/dashboard.module').then( m => m.DashboardPageModule)
-  },
-  
+  }
 ];
-
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
