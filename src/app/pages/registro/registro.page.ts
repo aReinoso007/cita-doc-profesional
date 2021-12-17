@@ -1,11 +1,14 @@
+import { ToastController } from '@ionic/angular';
 import { AuthService } from './../../service/auth.service';
 import { PasswordValidator } from './../../validators/password.validator';
 import { FormGroup, AbstractControl, NgForm, FormControl, Validators, ValidatorFn, ValidationErrors, FormBuilder } from '@angular/forms';
 import { AfterContentChecked, Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { Medico } from 'src/app/model/medico.model';
 import { SwiperComponent } from 'swiper/angular';
-import { SwiperOptions } from 'swiper';
-import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
+import Swiper, { SwiperOptions } from 'swiper';
+import SwiperCore, { Navigation, Pagination} from 'swiper';
+import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 
 SwiperCore.use([Pagination, Navigation])
 @Component({
@@ -24,6 +27,8 @@ export class RegistroPage implements OnInit{
   }; 
   passwordTypeInput  =  'password';
   iconpassword  =  'eye-off';
+  message = '';
+  header = '';
 
   signupForm: FormGroup;
   signupForm2: FormGroup;
@@ -40,7 +45,10 @@ export class RegistroPage implements OnInit{
 
   constructor(
     private authServie: AuthService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    public toastCotroller: ToastController,
+    private router: Router,
+    private location: Location
   ) { 
     this.setUpForm1();
     this.setUpForm2();
@@ -77,6 +85,7 @@ export class RegistroPage implements OnInit{
   onSubmit1(){
     this.submitted1 = true;
     if(!this.signupForm.valid){
+      this.presentToastOptions('Error', 'Debe llenar el formulario');
       return false;
     }else{
       this.swiper.s_slideNextTransitionEnd;
@@ -94,13 +103,21 @@ export class RegistroPage implements OnInit{
   async onSubmit2(){
     let message = '';
     this.submitted2 = true;
-    if(!this.signupForm2.valid){
+    if(!this.signupForm2.valid && !this.signupForm.valid){
+      this.presentToastOptions('Error', 'Debe llenar el formulario');
       return false;
     }else{
       await this.authServie.signUp(this.medico).subscribe(res=>{
-        message = res;
-        alert(message);
-      })
+        console.log('status: ', res.status);
+      }, error =>{
+        if(error.status === 201){
+          this.presentToastOptions('En hora buena!', 'Registro exitoso' );
+          this.router.navigateByUrl('/login');
+        }else{
+          this.presentToastOptions('Error',error.message);
+          this.router.navigateByUrl('/login');
+        }
+      });
     }
   } 
   
@@ -108,6 +125,20 @@ export class RegistroPage implements OnInit{
     this.passwordTypeInput  =  this.passwordTypeInput  ===  'text'  ?  'password'  :  'text';
     this.iconpassword  =  this.iconpassword  ===  'eye-off'  ?  'eye'  :  'eye-off';
     this.passwordEye.el.setFocus();
-}
+  }
+
+  async presentToastOptions(header: string, message: string){
+    const toast = await this.toastCotroller.create({
+      header: header,
+      message: message,
+      position: 'top',
+      duration: 2000
+    });
+    await toast.present();
+  }
+
+  goBack(){
+    this.location.back();
+  }
 
 }

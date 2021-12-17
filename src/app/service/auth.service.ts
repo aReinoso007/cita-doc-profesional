@@ -1,10 +1,10 @@
 import { Jwt } from './../model/jwt.model';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { Login } from './../model/login.model';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Medico } from '../model/medico.model';
-
+import { catchError } from 'rxjs/operators';
 
 
 @Injectable({

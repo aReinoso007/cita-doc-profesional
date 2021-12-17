@@ -1,10 +1,15 @@
 <ion-header>
   <ion-toolbar color="primary">
+    <ion-buttons slot="start" >
+      <ion-button color="dark" (click)="goBack()">
+        <ion-icon slot="icon-only" name="arrow-back" ></ion-icon>
+      </ion-button>
+    </ion-buttons>
     <ion-title> Registro </ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content color="light">
-  <swiper #swiper [config]="config" [pagination]="{ clickable: true }" [navigation]="{ prevEl: '.swiper-navigation-prev', nextEl: '.swiper-navigation-next'}">
+  <swiper #swiper [config]="config" [pagination]="{ clickable: true }" >
     <ng-template swiperSlide >
       <form [formGroup]="signupForm" (ngSubmit)="onSubmit1()">
         <h3>Datos Personales</h3>
@@ -69,7 +74,7 @@
 
         <ion-row>
           <ion-col>
-            <ion-button type="submit" color="primary" expand="block">Siguiente</ion-button>
+            <ion-button type="submit" color="success" expand="block"><ion-text>Desliza -></ion-text></ion-button>
           </ion-col>
         </ion-row>
       </form>
@@ -114,3 +119,15 @@
     </ng-template>
   </swiper>
 </ion-content>
+<!-- 
+  <ion-footer>
+  <ion-button
+    expand="full"
+    color="success"
+    routerLink="/"
+    routerDirection="forward"
+  >
+  Siguiente <ion-icon name="chevron-forward-outline"></ion-icon>
+  </ion-button>
+</ion-footer>
+-->
