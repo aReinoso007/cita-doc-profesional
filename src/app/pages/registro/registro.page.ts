@@ -1,8 +1,7 @@
 import { ToastController } from '@ionic/angular';
 import { AuthService } from './../../service/auth.service';
-import { PasswordValidator } from './../../validators/password.validator';
-import { FormGroup, AbstractControl, NgForm, FormControl, Validators, ValidatorFn, ValidationErrors, FormBuilder } from '@angular/forms';
-import { AfterContentChecked, Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { FormGroup, FormControl, Validators, ValidatorFn, ValidationErrors, FormBuilder } from '@angular/forms';
+import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { Medico } from 'src/app/model/medico.model';
 import { SwiperComponent } from 'swiper/angular';
 import Swiper, { SwiperOptions } from 'swiper';

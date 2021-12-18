@@ -1,3 +1,4 @@
+import { SwiperModule } from 'swiper/angular';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -13,6 +14,7 @@ import { DetallehorarioPage } from './detallehorario.page';
     CommonModule,
     FormsModule,
     IonicModule,
+    SwiperModule,
     DetallehorarioPageRoutingModule
   ],
   declarations: [DetallehorarioPage]
