@@ -1,9 +1,24 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>horarios</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content>
-
+<ion-content color="light">
+  <ion-grid>
+    <ion-row class="ion-text-center">
+      <ion-col *ngFor="let item of clinicas">
+        <img class="img-center" src="../../../assets/app/clinica.png" />
+        <ion-item>
+          <ion-label >
+            <h3>{{item.nombreClinica}}</h3>
+          </ion-label>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
+<!-- 
+  <ion-card *ngFor="let item of clinicas">
+    <img class="img-center" src="../../../assets/app/clinica.png" />
+    <ion-item>
+      <ion-label >
+        <h3>{{item.nombreClinica}}</h3>
+      </ion-label>
+    </ion-item>
+  </ion-card>
+-->
