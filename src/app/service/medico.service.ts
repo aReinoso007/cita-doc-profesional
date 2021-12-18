@@ -35,6 +35,14 @@ export class MedicoService {
     return this.http.get<Clinica>(this.clinicasApi+'/medico_clinica/?idMedico='+this.tokenService.getUserId());
   }
 
+  getAllClinicas(): Observable<Clinica>{
+    return this.http.get<Clinica>(this.clinicasApi);
+  }
+
+  addClinica(clinica: Clinica): Observable<any>{
+    return this.http.get(this.clinicasApi);
+  }
+
   saveHorario(registroId: number, horario: Horario): Observable<any>{
     return this.http.post<any>(this.horariosApi+'/'+registroId, horario, {headers: this.headers_obj});
   }
