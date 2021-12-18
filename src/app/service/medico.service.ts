@@ -29,8 +29,8 @@ export class MedicoService {
   }
   /*Devuelve el id del registro con el id del medico y la clinica
     esto sirve para poder listar los horarios de esa clinica, agregar, editar o borrar */
-  getRegistroPorMedicoYClinica(medicoId: number, clinicaId: number){
-    return this.http.get(this.registroApi+'/buscar/'+medicoId+'/'+clinicaId)
+  getRegistroPorMedicoYClinica(medicoId: number, clinicaId: number): Observable<number>{
+    return this.http.get<number>(this.registroApi+'/buscar/'+medicoId+'/'+clinicaId)
   }
 
   getClinicasMedico(): Observable<Clinica>{

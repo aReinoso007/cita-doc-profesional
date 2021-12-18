@@ -21,7 +21,7 @@ export class DetallehorarioPage implements OnInit {
     pagination: true
   }; 
   clinicaId: string;
-  registroId: any;
+  registroId: number;
   horarios: any[]=[];
   constructor(private tokenService: TokenService, private medicoService: MedicoService,
   private route: ActivatedRoute, private location: Location,
@@ -34,7 +34,6 @@ export class DetallehorarioPage implements OnInit {
       this.swiper.updateSwiper({});
     }
     this.verHorario(this.clinicaId);
-    //this.getRegistroId();
   }
 
   verHorario(registroId: string){
@@ -54,20 +53,15 @@ export class DetallehorarioPage implements OnInit {
     console.log('click');
   }
 
-  getRegistroId(){
-    let cliId: number = Number(this.clinicaId);
-    return this.medicoService.getRegistroPorMedicoYClinica(this.tokenService.getUserId(), cliId).subscribe(id=>{
-      console.log('first data: ', id);
-      this.registroId = id.valueOf;
-      //this.registroId = id.valueOf();
-    })
-  }
 
   goToAdd(){
-    this.getRegistroId();
-    console.log('idRegistro: ', this.registroId);
-    /*const url = '/tabs/horario/'+this.clinicaId+'/'+this.registroId;
-    this.router.navigate([url]);*/
+    let cliId: number = Number(this.clinicaId);
+    var id = 0;
+    this.medicoService.getRegistroPorMedicoYClinica(this.tokenService.getUserId(), cliId).subscribe((res)=>{
+      id = JSON.parse(JSON.stringify(res));
+      const url = '/tabs/horario/'+this.clinicaId+'/'+id;
+      this.router.navigate([url]);
+    });
   }
 
 }
