@@ -3,7 +3,7 @@
     <ion-row class="ion-text-center">
       <ion-col *ngFor="let item of clinicas">
         <img class="img-center" src="../../../assets/app/clinica.png" />
-        <ion-item class="ion-text-center">
+        <ion-item class="ion-text-center" (click)="verHorario(item.clinicaId)">
           <ion-label >
             {{item.nombreClinica}}
           </ion-label>

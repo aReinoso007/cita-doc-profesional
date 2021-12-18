@@ -39,10 +39,15 @@ const routes: Routes = [
         path: 'horario',
         children: [
           {
-            path: '',
+            path:'',
             loadChildren: () => import ('../tabs/horarios/horarios.module').then(m=> m.HorariosPageModule)
+          },
+          {
+            path: ':id',
+            loadChildren: () => import('./detallehorario/detallehorario.module').then( m => m.DetallehorarioPageModule)
           }
         ]
+
       },
       {
         path: '',
