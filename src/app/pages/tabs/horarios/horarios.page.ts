@@ -13,12 +13,10 @@ export class HorariosPage implements OnInit {
 
   ngOnInit() {
     this.getClinicas();
-    console.log('clinicas: ',this.clinicas[0]);
   }
 
   getClinicas(){
     this.medicoService.getClinicasMedico().subscribe((data: Clinica)=>{
-        console.log('data: ', data);
         this.clinicas = JSON.parse(JSON.stringify(data));
     })
   }

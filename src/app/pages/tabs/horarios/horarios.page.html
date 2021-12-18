@@ -3,9 +3,9 @@
     <ion-row class="ion-text-center">
       <ion-col *ngFor="let item of clinicas">
         <img class="img-center" src="../../../assets/app/clinica.png" />
-        <ion-item>
+        <ion-item class="ion-text-center">
           <ion-label >
-            <h3>{{item.nombreClinica}}</h3>
+            {{item.nombreClinica}}
           </ion-label>
         </ion-item>
       </ion-col>
