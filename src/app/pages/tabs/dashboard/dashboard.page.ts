@@ -15,8 +15,9 @@ export class DashboardPage implements OnInit {
 
   ngOnInit() {
     this.medicoService.getMedico().subscribe((data: Medico)=>{
-      
-    })
+      this.medico = JSON.parse(JSON.stringify(data));
+    });
+    console.log('Medico: ', this.medico);
   }
 
 }

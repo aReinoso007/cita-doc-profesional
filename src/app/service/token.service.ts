@@ -31,7 +31,7 @@ export class TokenService {
     window.sessionStorage.setItem(USER_ID, userId);
   }
 
-  public getUserId(): string{
+  public getUserId(): number{
     return this.getDecodedAccessToken(this.getToken()).userId;
   }
 

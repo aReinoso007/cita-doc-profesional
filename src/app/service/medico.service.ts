@@ -18,6 +18,6 @@ export class MedicoService {
   
   headers_obj = new HttpHeaders().set("Authorization","Bearer "+this.tokenService.getToken());
   getMedico(): Observable<Medico>{
-    return this.http.get<Medico>(this.medicoApi+'/'+this.tokenService.getUserId, {headers: this.headers_obj});
+    return this.http.get<Medico>(this.medicoApi+'/'+this.tokenService.getUserId(),{headers: this.headers_obj});
   }
 }
