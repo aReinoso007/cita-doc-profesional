@@ -21,7 +21,7 @@ export class DetallehorarioPage implements OnInit {
     pagination: true
   }; 
   clinicaId: string;
-  registroId: number;
+  registroId: any;
   horarios: any[]=[];
   constructor(private tokenService: TokenService, private medicoService: MedicoService,
   private route: ActivatedRoute, private location: Location,
@@ -34,13 +34,15 @@ export class DetallehorarioPage implements OnInit {
       this.swiper.updateSwiper({});
     }
     this.verHorario(this.clinicaId);
+    //this.getRegistroId();
   }
 
   verHorario(registroId: string){
     /*Esta funcion retorna los horarios para esa clinica*/
     this.medicoService.getHorariosOrdenados(Number(registroId)).subscribe((data: Horario)=>{
-      console.log('horarios: ', data);
       this.horarios = JSON.parse(JSON.stringify(data))
+    }, error =>{
+      console.log('Error ', error.message)
     });
   }
 
@@ -53,15 +55,19 @@ export class DetallehorarioPage implements OnInit {
   }
 
   getRegistroId(){
-    return this.medicoService.getRegistroPorMedicoYClinica(this.tokenService.getUserId(), Number(this.clinicaId)).subscribe(data=>{
-      this.registroId = data;
+    let cliId: number = Number(this.clinicaId);
+    return this.medicoService.getRegistroPorMedicoYClinica(this.tokenService.getUserId(), cliId).subscribe(id=>{
+      console.log('first data: ', id);
+      this.registroId = id.valueOf;
+      //this.registroId = id.valueOf();
     })
   }
 
   goToAdd(){
     this.getRegistroId();
-    const url = '/tabs/horario/'+this.clinicaId+'/'+this.registroId;
-    this.router.navigate([url]);
+    console.log('idRegistro: ', this.registroId);
+    /*const url = '/tabs/horario/'+this.clinicaId+'/'+this.registroId;
+    this.router.navigate([url]);*/
   }
 
 }

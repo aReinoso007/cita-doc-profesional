@@ -45,6 +45,10 @@ const routes: Routes = [
           {
             path: ':id',
             loadChildren: () => import('./detallehorario/detallehorario.module').then( m => m.DetallehorarioPageModule)
+          },
+          {
+            path: ':id/:idReg',
+            loadChildren: () => import('./addhorario/addhorario.module').then( m => m.AddhorarioPageModule)
           }
         ]
 
@@ -63,10 +67,6 @@ const routes: Routes = [
   {
     path: 'historial',
     loadChildren: () => import('./historial/historial.module').then( m => m.HistorialPageModule)
-  },
-  {
-    path: 'addhorario',
-    loadChildren: () => import('./addhorario/addhorario.module').then( m => m.AddhorarioPageModule)
   }
 ];
 @NgModule({

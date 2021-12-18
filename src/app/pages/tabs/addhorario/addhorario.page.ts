@@ -11,10 +11,13 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./addhorario.page.scss'],
 })
 export class AddhorarioPage implements OnInit {
-
+  registroId: string;
   constructor(private medicoService: MedicoService, private route: ActivatedRoute,
-              private toastCtrl: ToastController,
-              private location: Location) { }
+    private toastCtrl: ToastController,
+    private location: Location) { 
+      this.registroId= this.route.snapshot.paramMap.get('idReg');
+      console.log('id registro: ', this.registroId);
+  }
 
   ngOnInit() {
   }
