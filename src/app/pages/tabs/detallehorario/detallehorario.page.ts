@@ -35,4 +35,8 @@ export class DetallehorarioPage implements OnInit {
     this.location.back();
   }
 
+  registrarHorario(){
+    console.log('click');
+  }
+
 }
