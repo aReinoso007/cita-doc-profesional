@@ -5,6 +5,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Medico } from '../model/medico.model';
 import { Clinica } from '../model/clinica.model';
+import { Cita } from '../model/cita.model';
 
 @Injectable({
   providedIn: 'root'
@@ -13,10 +14,11 @@ import { Clinica } from '../model/clinica.model';
 
 
 export class MedicoService {
-  medicoApi = 'http://localhost:8090/api/private/medico';
+  medicoApi   = 'http://localhost:8090/api/private/medico';
   registroApi = 'http://localhost:8090/api/private/registro_clinica';
   clinicasApi = 'http://localhost:8090/api/public/clinica';
   horariosApi = 'http://localhost:8090/api/private/horario';
+  citaApi     = 'http://localhost:8090/api/public/cita';
   constructor(private http: HttpClient,private tokenService: TokenService) { 
     
   }
@@ -37,6 +39,10 @@ export class MedicoService {
 
   getAllClinicas(): Observable<Clinica>{
     return this.http.get<Clinica>(this.clinicasApi);
+  }
+
+  getHistorialCitas(id: number): Observable<Cita[]>{
+    return this.http.get<Cita[]>(this.citaApi+'/historial/'+id);
   }
 
   addClinica(clinica: Clinica): Observable<any>{

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MedicoService } from 'src/app/service/medico.service';
 
 @Component({
   selector: 'app-historial',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HistorialPage implements OnInit {
 
-  constructor() { }
+  constructor(private medicoService: MedicoService) { }
 
   ngOnInit() {
+  }
+
+  getHistorial(){
+    
   }
 
 }
