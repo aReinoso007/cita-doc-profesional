@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import jwt_decode from 'jwt-decode';
 
 const TOKEN_KEY='AuthToken';
 const USER_ID='AuthUserId';
@@ -31,7 +32,7 @@ export class TokenService {
   }
 
   public getUserId(): string{
-    return window.sessionStorage.getItem(USER_ID);
+    return this.getDecodedAccessToken(this.getToken()).userId;
   }
 
   public setEmail(email: string): void{
@@ -59,6 +60,14 @@ export class TokenService {
 
   public getApellido(): string{
     return window.sessionStorage.getItem(APELLIDO)
+  }
+
+  public getDecodedAccessToken(token: string): any{
+    try{
+      return jwt_decode(token);
+    }catch(Error){
+      return null;
+    }
   }
 
 }

@@ -12,7 +12,7 @@ import { catchError } from 'rxjs/operators';
 })
 export class AuthService {
 
-  authURL = 'http://localhost:8090//api/auth/';
+  authURL = 'http://localhost:8090/api/auth/';
   constructor(private http: HttpClient) { }
 
   public login(login: Login): Observable<Jwt>{

@@ -21,10 +21,12 @@ export class LoginPage implements OnInit {
   ) { }
 
   ngOnInit() {
+    console.log('Token: ',this.tokenService.getDecodedAccessToken(this.tokenService.getToken()).userId);
   }
 
   onLogin(){
     this.login = new Login(this.email, this.password);
+    console.log('login ', this.login);
     this.authService.login(this.login).subscribe(
       data=>{
         console.log('data', data);
