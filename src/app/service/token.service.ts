@@ -50,7 +50,7 @@ export class TokenService {
   }
 
   public getNombre(): string{
-    return window.sessionStorage.getItem(NOMBRE)
+    return this.getDecodedAccessToken(this.getToken()).nombre;
   }
 
   public setApellido(apellido: string): void{
@@ -59,8 +59,13 @@ export class TokenService {
   }
 
   public getApellido(): string{
-    return window.sessionStorage.getItem(APELLIDO)
+    return this.getDecodedAccessToken(this.getToken()).apellido;
   }
+
+  public getProfesion(): string{
+    return this.getDecodedAccessToken(this.getToken()).profesion;
+  }
+
 
   public getDecodedAccessToken(token: string): any{
     try{

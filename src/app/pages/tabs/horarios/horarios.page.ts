@@ -3,6 +3,7 @@ import { TokenService } from './../../../service/token.service';
 import { Component, OnInit } from '@angular/core';
 import { Clinica } from 'src/app/model/clinica.model';
 import { MedicoService } from 'src/app/service/medico.service';
+import { PopoverController } from '@ionic/angular';
 
 @Component({
   selector: 'app-horarios',

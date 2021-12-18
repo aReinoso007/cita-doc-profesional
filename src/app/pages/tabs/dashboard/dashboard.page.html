@@ -1,7 +1,13 @@
-<ion-header>
-
-</ion-header>
-
 <ion-content color="light">
-  <h1>{{medico.nombre}} {{medico.apellido}}</h1>
+  <ion-card>
+    <ion-avatar color="light">
+      <img src="../../../../assets/app/medic.png">
+    </ion-avatar>
+    <ion-icon name="information-outline"></ion-icon>
+    <ion-label>{{medico.nombre}} {{medico.apellido}}</ion-label>
+    <h3>{{medico.profesion}}</h3>
+  </ion-card>
+  <div class="citas">
+    
+  </div>
 </ion-content>

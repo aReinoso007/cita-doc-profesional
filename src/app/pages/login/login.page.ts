@@ -3,6 +3,8 @@ import { TokenService } from './../../service/token.service';
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/service/auth.service';
 import { ToastController } from '@ionic/angular';
+import { MedicoService } from 'src/app/service/medico.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +19,9 @@ export class LoginPage implements OnInit {
   constructor(
     private authService: AuthService,
     private tokenService: TokenService,
-    private toastController: ToastController
+    private toastController: ToastController,
+    private medicoService: MedicoService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -51,6 +55,10 @@ export class LoginPage implements OnInit {
       position:'middle'
     });
     toast.present();
+  }
+
+  verifyUserSignedin(){
+    if(this.medicoService.getMedico()!=null) this.router.navigateByUrl('/tabs/dashboad');
   }
 
 }
