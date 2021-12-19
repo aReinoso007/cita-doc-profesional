@@ -54,6 +54,6 @@ export class MedicoService {
   }
 
   getHorariosOrdenados(registroId: number): Observable<Horario[]>{
-    return this.http.get<Horario[]>(this.horariosApi+'/fechas_ordenadas/'+registroId, {headers: this.headers_obj});
+    return this.http.get<Horario[]>(this.horariosApi+'/horario_ordenado/'+registroId, {headers: this.headers_obj});
   }
 }

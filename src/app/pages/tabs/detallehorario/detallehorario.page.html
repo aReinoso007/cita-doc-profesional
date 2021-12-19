@@ -33,7 +33,27 @@
       </ion-list>
     </ng-template>
   </swiper>
-  <div class="add-form">
-
+  <div class="horarios-table" *ngIf="horarios.length >0">
+    <h1 style="text-align: center;">Horario registrado</h1>
+    <ion-grid class="ion-margin">
+      <ion-row>
+        <ion-col>Dia</ion-col>
+        <ion-col>Inicio</ion-col>
+        <ion-col>Fin</ion-col>
+      </ion-row>
+      <ion-row *ngFor="let item of horarios">
+        <ion-col>{{ item.dia }}</ion-col>
+        <ion-col>{{ item.inicio }}</ion-col>
+        <ion-col>{{ item.fin }}</ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+      <ion-fab-button (click)="goToAdd()">
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
   </div>
 </ion-content>
+<!-- 
+  
+-->
