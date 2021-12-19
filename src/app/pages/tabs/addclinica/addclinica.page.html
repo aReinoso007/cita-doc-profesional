@@ -1,9 +1,28 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>addclinica</ion-title>
+    <ion-buttons slot="start" >
+      <ion-button color="dark" (click)="goBack()">
+        <ion-icon slot="icon-only" name="arrow-back" ></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content color="light">
+  <div class="seleccion">
+    <h1>Seleccione la clinica</h1>
+    <ion-list>
+      <ion-item>
+        <ion-label>Clinicas disponibles</ion-label>
+        <ion-select>
+          <ion-select-option *ngFor="let c of clinicas" [value]="c.clinicaId">{{c.nombreClinica}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+  </div>
+
+  <div class="add-clinica"> 
+
+  </div>
 
 </ion-content>

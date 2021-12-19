@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Clinica } from 'src/app/model/clinica.model';
 import { ClinicaService } from 'src/app/service/clinica.service';
@@ -12,7 +13,7 @@ export class AddclinicaPage implements OnInit {
   
   clinica: Clinica = new Clinica();
   clinicas: Clinica[] = [];
-  constructor(private clinicaService: ClinicaService, private tokenService: TokenService) { }
+  constructor(private clinicaService: ClinicaService, private tokenService: TokenService, private location: Location) { }
 
   ngOnInit() {
     this.getClinicas();
@@ -22,7 +23,12 @@ export class AddclinicaPage implements OnInit {
     this.clinicaService.getAllClinicas().subscribe((data: Clinica)=>{
       console.log('Clinica raw data: ', data);
       this.clinicas = JSON.parse(JSON.stringify(data));
+      console.log('clinicas: ', this.clinicas);
     })
+  }
+
+  goBack(){
+    this.location.back();
   }
 
 }
