@@ -54,6 +54,16 @@ const routes: Routes = [
 
       },
       {
+        path: 'clinicas',
+        children: [
+          {
+            path:'',
+            loadChildren: () => import('./addclinica/addclinica.module').then( m => m.AddclinicaPageModule)
+          }
+        ]
+        
+      },
+      {
         path: '',
         redirectTo: '/tabs/dashboard',
         pathMatch: 'full'
@@ -67,10 +77,6 @@ const routes: Routes = [
   {
     path: 'historial',
     loadChildren: () => import('./historial/historial.module').then( m => m.HistorialPageModule)
-  },
-  {
-    path: 'addclinica',
-    loadChildren: () => import('./addclinica/addclinica.module').then( m => m.AddclinicaPageModule)
   }
 ];
 @NgModule({
