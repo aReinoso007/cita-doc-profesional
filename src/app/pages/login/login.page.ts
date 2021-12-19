@@ -25,7 +25,7 @@ export class LoginPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log('Token: ',this.tokenService.getDecodedAccessToken(this.tokenService.getToken()).userId);
+    
   }
 
   onLogin(){
@@ -36,6 +36,7 @@ export class LoginPage implements OnInit {
         console.log('data', data);
         console.log('dataToken: ',data.token);
         this.tokenService.setToken(data.token);
+        this.router.navigateByUrl('/tabs/dashboard');
       },
       err=>{
         this.errMessage = err.error.message;

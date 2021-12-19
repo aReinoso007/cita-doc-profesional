@@ -50,7 +50,7 @@ export class MedicoService {
   }
 
   saveHorario(registroId: number, horario: Horario): Observable<any>{
-    return this.http.post<any>(this.horariosApi+'/'+registroId, horario, {headers: this.headers_obj});
+    return this.http.post<any>(this.horariosApi+'/guardar/'+registroId, horario, {headers: this.headers_obj});
   }
 
   getHorariosOrdenados(registroId: number): Observable<Horario[]>{

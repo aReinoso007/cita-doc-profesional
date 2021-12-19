@@ -38,7 +38,7 @@ export class DetallehorarioPage implements OnInit {
 
   verHorario(registroId: string){
     /*Esta funcion retorna los horarios para esa clinica*/
-    this.medicoService.getHorariosOrdenados(Number(registroId)).subscribe((data: Horario)=>{
+    this.medicoService.getHorariosOrdenados(Number(registroId)).subscribe((data)=>{
       this.horarios = JSON.parse(JSON.stringify(data))
     }, error =>{
       console.log('Error ', error.message)
