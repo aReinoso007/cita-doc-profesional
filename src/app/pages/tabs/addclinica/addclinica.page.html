@@ -9,20 +9,25 @@
 </ion-header>
 
 <ion-content color="light">
-  <div class="seleccion">
+  <div class="seleccion" *ngIf="add === false">
     <h1>Seleccione la clinica</h1>
     <ion-list>
       <ion-item>
-        <ion-label>Clinicas disponibles</ion-label>
+        <ion-label>Clinicas</ion-label>
         <ion-select>
           <ion-select-option *ngFor="let c of clinicas" [value]="c.clinicaId">{{c.nombreClinica}}</ion-select-option>
         </ion-select>
       </ion-item>
+      <br>
+      <ion-text>Deseas agregar tu propia clinica?</ion-text>
+      <br>
+      <ion-button color="success" (click)="setAdd()">Agregar</ion-button>
     </ion-list>
   </div>
 
-  <div class="add-clinica"> 
-
+  <div class="add-clinica" *ngIf="add === true"> 
+    <h1>Formulario</h1>
+    <button expand="block" color="success" (click)="setBack()">Add</button>
   </div>
 
 </ion-content>
