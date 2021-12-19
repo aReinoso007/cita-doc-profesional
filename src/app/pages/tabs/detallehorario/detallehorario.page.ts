@@ -52,10 +52,6 @@ export class DetallehorarioPage implements OnInit {
     this.location.back();
   }
 
-  registrarHorario(){
-    console.log('click');
-  }
-
   goToAdd(){
     let cliId: number = Number(this.clinicaId);
     var id = 0;
