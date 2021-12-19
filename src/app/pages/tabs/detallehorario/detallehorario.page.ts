@@ -27,6 +27,7 @@ export class DetallehorarioPage implements OnInit {
   private route: ActivatedRoute, private location: Location,
   private router: Router) { 
     this.clinicaId = this.route.snapshot.paramMap.get('id');
+    this.verHorario();
   }
 
   ngOnInit() {

@@ -32,8 +32,13 @@ export class AddhorarioPage implements OnInit {
     var regId: number = Number(this.registroId);
     this.medicoService.saveHorario(regId, this.horario).subscribe(res=>{
       console.log('status: ', res.status);
+      if(res.status === 201 || res.status === undefined){
+        this.presentToastOptions('En hora buena!', 'Registro exitoso' );
+        this.goBack();
+        this.horario = new Horario();
+      }
     }, error=>{
-      if(error.status === 201){
+      if(error.status === 201 || error.status === undefined){
         this.presentToastOptions('En hora buena!', 'Registro exitoso' );
         this.goBack();
         this.horario = new Horario();
