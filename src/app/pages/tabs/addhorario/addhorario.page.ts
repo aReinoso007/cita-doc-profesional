@@ -22,17 +22,20 @@ export class AddhorarioPage implements OnInit {
   }
 
   ngOnInit() {
+    console.log('RegistroId: ', this.registroId);
   }
 
   async addHorario(){
     this.finFormated();
     this.inicioFormated();
     console.log('horario: ', this.horario);
-    this.medicoService.saveHorario(Number(this.registroId), this.horario).subscribe(res=>{
+    var regId: number = Number(this.registroId);
+    this.medicoService.saveHorario(regId, this.horario).subscribe(res=>{
       console.log('status: ', res.status);
     }, error=>{
       if(error.status === 201){
         this.presentToastOptions('En hora buena!', 'Registro exitoso' );
+        this.goBack();
         this.horario = new Horario();
       }else{
         this.presentToastOptions('Error',error.message);

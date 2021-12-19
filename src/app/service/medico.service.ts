@@ -33,6 +33,10 @@ export class MedicoService {
     return this.http.get<number>(this.registroApi+'/buscar/'+medicoId+'/'+clinicaId)
   }
 
+  getRegistroByMedicoYClinica(medicoId: number, clinicaId: number): Observable<number>{
+    return this.http.get<number>(this.registroApi+'/buscar2/'+medicoId+'/'+clinicaId)
+  }
+
   getClinicasMedico(): Observable<Clinica>{
     return this.http.get<Clinica>(this.clinicasApi+'/medico_clinica/?idMedico='+this.tokenService.getUserId());
   }

@@ -14,6 +14,7 @@ SwiperCore.use([Pagination, Navigation])
   templateUrl: './detallehorario.page.html',
   styleUrls: ['./detallehorario.page.scss'],
 })
+
 export class DetallehorarioPage implements OnInit {
   @ViewChild('swiper') swiper: SwiperComponent; 
   config: SwiperOptions = {
@@ -21,7 +22,6 @@ export class DetallehorarioPage implements OnInit {
     pagination: true
   }; 
   clinicaId: string;
-  registroId: number;
   horarios: any[]=[];
   constructor(private tokenService: TokenService, private medicoService: MedicoService,
   private route: ActivatedRoute, private location: Location,
@@ -30,18 +30,21 @@ export class DetallehorarioPage implements OnInit {
   }
 
   ngOnInit() {
+    this.verHorario();
     if(this.swiper){
       this.swiper.updateSwiper({});
     }
-    this.verHorario(this.clinicaId);
+    
   }
 
-  verHorario(registroId: string){
-    /*Esta funcion retorna los horarios para esa clinica*/
-    this.medicoService.getHorariosOrdenados(Number(registroId)).subscribe((data)=>{
-      this.horarios = JSON.parse(JSON.stringify(data))
-    }, error =>{
-      console.log('Error ', error.message)
+  verHorario(){
+    let cliId: number = Number(this.clinicaId);
+    this.medicoService.getRegistroByMedicoYClinica(this.tokenService.getUserId(), cliId).subscribe(res =>{
+      this.medicoService.getHorariosOrdenados(res).subscribe((data)=>{
+        this.horarios = JSON.parse(JSON.stringify(data))
+      }, error =>{
+        console.log('Error ', error.message)
+      });
     });
   }
 
@@ -52,7 +55,6 @@ export class DetallehorarioPage implements OnInit {
   registrarHorario(){
     console.log('click');
   }
-
 
   goToAdd(){
     let cliId: number = Number(this.clinicaId);
