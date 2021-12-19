@@ -41,7 +41,11 @@
         <ion-label position="floating">Numero contacto</ion-label>
         <ion-input formControlName="contacto" type="number" [(ngModel)]="clinica.contacto"></ion-input>
       </ion-item>
+      <br>
       <ion-row>
+        <ion-col>
+          <ion-button expand="block" color="danger" (click)="setBack()">Cancelar</ion-button>
+        </ion-col>
         <ion-col>
           <ion-button expand="block" color="success" (click)="setBack()">registrar</ion-button>
         </ion-col>

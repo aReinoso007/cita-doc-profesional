@@ -106,7 +106,7 @@ export class RegistroPage implements OnInit{
       this.presentToastOptions('Error', 'Debe llenar el formulario');
       return false;
     }else{
-      await this.authServie.signUp(this.medico).subscribe(res=>{
+      this.authServie.signUp(this.medico).subscribe(res=>{
         console.log('status: ', res.status);
       }, error =>{
         if(error.status === 201){

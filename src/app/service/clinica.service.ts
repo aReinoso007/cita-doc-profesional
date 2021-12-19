@@ -17,6 +17,10 @@ export class ClinicaService {
     return this.http.get<Clinica>(this.clinicasApi);
   }
 
+  getClinicasDisponibles(medicoId: number): Observable<Clinica[]>{
+    return this.http.get<Clinica[]>(this.clinicasApi+'/disponibles/'+medicoId);
+  }
+
   addClinica(clinica: Clinica): Observable<any>{
     return this.http.post(this.clinicasApi, clinica);
   }

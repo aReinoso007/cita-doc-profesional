@@ -25,7 +25,7 @@ export class AddclinicaPage implements OnInit {
   clinicaForm: FormGroup
   submitted: boolean = false;
   ngOnInit() {
-    this.getClinicas();
+    this.getClinicasDisponibles();
   }
 
   addClinica(){
@@ -36,6 +36,12 @@ export class AddclinicaPage implements OnInit {
 
   getClinicas(){
     this.clinicaService.getAllClinicas().subscribe((data: Clinica)=>{
+      this.clinicas = JSON.parse(JSON.stringify(data));
+    })
+  }
+
+  getClinicasDisponibles(){
+    this.clinicaService.getClinicasDisponibles(this.tokenService.getUserId()).subscribe((data:Clinica[])=>{
       this.clinicas = JSON.parse(JSON.stringify(data));
     })
   }
