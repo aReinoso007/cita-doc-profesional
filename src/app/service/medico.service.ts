@@ -45,9 +45,6 @@ export class MedicoService {
     return this.http.get<Cita[]>(this.citaApi+'/historial/'+id);
   }
 
-  addClinica(clinica: Clinica): Observable<any>{
-    return this.http.get(this.clinicasApi);
-  }
 
   saveHorario(registroId: number, horario: Horario): Observable<any>{
     return this.http.post<any>(this.horariosApi+'/guardar/'+registroId, horario, {headers: this.headers_obj});

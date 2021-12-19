@@ -19,7 +19,6 @@ export class AddhorarioPage implements OnInit {
     private toastCtrl: ToastController,
     private location: Location) { 
       this.registroId= this.route.snapshot.paramMap.get('idReg');
-      console.log('id registro: ', this.registroId);
   }
 
   ngOnInit() {
@@ -61,13 +60,6 @@ export class AddhorarioPage implements OnInit {
     var h: Horario = new Horario();
     this.horarios.push(h);
     console.log('lista: ', this.horarios);
-  }
-
-  dummyAdd(){
-    this.finFormated();
-    this.inicioFormated();
-    this.horario = new Horario();
-    console.log('horario limpio: ', this.horario);
   }
 
   inicioFormated(){
