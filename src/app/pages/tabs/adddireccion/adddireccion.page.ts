@@ -79,6 +79,7 @@ export class AdddireccionPage implements OnInit {
     }else{
       this.saveDireccion();
       this.direccionForm.reset();
+      this.router.navigateByUrl('/tabs/clinicas');
     }
   }
   
