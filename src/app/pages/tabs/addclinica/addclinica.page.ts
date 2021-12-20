@@ -39,13 +39,18 @@ export class AddclinicaPage implements OnInit {
   addClinica(){
     this.clinicaService.addClinica(this.clinica).subscribe(res=>{
       console.log('respuesta: ', res);
-    })
+    }, error=>{
+      if(error.status === 201){
+        this.presentToastOptions('Exito', 'Clinica registrada con exito');
+      }else{
+        this.presentToastOptions('Error', 'Algo salio mal');
+      }
+    });
   }
 
   addRegistro(){
     this.formulario = new FormularioRegistroClinica(Number(this.registroForm.get('clinicaId').value), this.tokenService.getUserId());
     this.medicoService.postRegistroClinicaMedico(this.formulario).subscribe(res=>{
-      console.log('respuesta agregar registro: ', res);
     }, error=>{
       if(error.status === 201){
         this.presentToastOptions('Exito','Clinica agregada con exito');
@@ -109,6 +114,8 @@ export class AddclinicaPage implements OnInit {
       this.submitted = false;
       this.presentToastOptions('Error', 'Debe llenar el formulario');
     }else{
+      this.addClinica();
+      this.add = false;
       this.clinicaForm.reset()
     }
   }
