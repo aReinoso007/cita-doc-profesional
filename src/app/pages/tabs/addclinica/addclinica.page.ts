@@ -6,6 +6,7 @@ import { Clinica } from 'src/app/model/clinica.model';
 import { ClinicaService } from 'src/app/service/clinica.service';
 import { TokenService } from 'src/app/service/token.service';
 import { FormularioRegistroClinica } from 'src/app/model/formularioRegistroClinica.model';
+import { MedicoService } from 'src/app/service/medico.service';
 
 @Component({
   selector: 'app-addclinica',
@@ -19,6 +20,7 @@ export class AddclinicaPage implements OnInit {
   formulario: FormularioRegistroClinica;
   add: boolean = false;
   constructor(private clinicaService: ClinicaService, 
+    private medicoService: MedicoService,
     private tokenService: TokenService, private location: Location, 
     private formBuilder: FormBuilder, private toastCtrl: ToastController) { 
       this.setFormulario();
@@ -32,6 +34,7 @@ export class AddclinicaPage implements OnInit {
   ngOnInit() {
     this.getClinicasDisponibles();
   }
+
   /*Esto es para agregar una nueva clinica */
   addClinica(){
     this.clinicaService.addClinica(this.clinica).subscribe(res=>{
@@ -41,7 +44,15 @@ export class AddclinicaPage implements OnInit {
 
   addRegistro(){
     this.formulario = new FormularioRegistroClinica(Number(this.registroForm.get('clinicaId').value), this.tokenService.getUserId());
-    
+    this.medicoService.postRegistroClinicaMedico(this.formulario).subscribe(res=>{
+      console.log('respuesta agregar registro: ', res);
+    }, error=>{
+      if(error.status === 201){
+        this.presentToastOptions('Exito','Clinica agregada con exito');
+      }else{
+        this.presentToastOptions('Oh no!', 'Algo salio mal');
+      }
+    });
   }
 
   getClinicas(){
@@ -53,6 +64,8 @@ export class AddclinicaPage implements OnInit {
   getClinicasDisponibles(){
     this.clinicaService.getClinicasDisponibles(this.tokenService.getUserId()).subscribe((data:Clinica[])=>{
       this.clinicas = JSON.parse(JSON.stringify(data));
+    }, error =>{
+      console.log('Error response: ', error.status);
     })
   }
 
@@ -82,8 +95,8 @@ export class AddclinicaPage implements OnInit {
   onSubmitRegistro(){
     this.submitted2 = true;
     if(!this.registroForm.valid){
-      this.presentToastOptions('Error', 'Debe seleccionar una clinica');
       this.submitted2 = false;
+      this.presentToastOptions('Error', 'Debe seleccionar una clinica');
     }else{
       this.addRegistro();
       this.registroForm.reset();
@@ -93,8 +106,8 @@ export class AddclinicaPage implements OnInit {
   onSubmit(){
     this.submitted = true;
     if(!this.clinicaForm.valid){
-      this.presentToastOptions('Error', 'Debe llenar el formulario');
       this.submitted = false;
+      this.presentToastOptions('Error', 'Debe llenar el formulario');
     }else{
       this.clinicaForm.reset()
     }
