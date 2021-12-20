@@ -6,6 +6,7 @@ import { Injectable } from '@angular/core';
 import { Medico } from '../model/medico.model';
 import { Clinica } from '../model/clinica.model';
 import { Cita } from '../model/cita.model';
+import { FormularioRegistroClinica } from '../model/formularioRegistroClinica.model';
 
 @Injectable({
   providedIn: 'root'
@@ -27,12 +28,14 @@ export class MedicoService {
   getMedico(): Observable<Medico>{
     return this.http.get<Medico>(this.medicoApi+'/'+this.tokenService.getUserId(),{headers: this.headers_obj});
   }
+
+  
   /*Devuelve el id del registro con el id del medico y la clinica
     esto sirve para poder listar los horarios de esa clinica, agregar, editar o borrar */
   getRegistroPorMedicoYClinica(medicoId: number, clinicaId: number): Observable<number>{
     return this.http.get<number>(this.registroApi+'/buscar/'+medicoId+'/'+clinicaId)
   }
-
+  /*Esta funcion es la pepa */
   getRegistroByMedicoYClinica(medicoId: number, clinicaId: number): Observable<number>{
     return this.http.get<number>(this.registroApi+'/buscar2/'+medicoId+'/'+clinicaId)
   }
@@ -41,15 +44,15 @@ export class MedicoService {
     return this.http.get<Clinica>(this.clinicasApi+'/medico_clinica/?idMedico='+this.tokenService.getUserId());
   }
 
-  getAllClinicas(): Observable<Clinica>{
-    return this.http.get<Clinica>(this.clinicasApi);
-  }
-
   getHistorialCitas(id: number): Observable<Cita[]>{
     return this.http.get<Cita[]>(this.citaApi+'/historial/'+id);
   }
 
+  postRegistroClinicaMedico(registro: FormularioRegistroClinica): Observable<any>{
+    return this.http.post(this.registroApi, registro);
+  }
 
+  /*Esta seccion esta dedicada a los horarios */
   saveHorario(registroId: number, horario: Horario): Observable<any>{
     return this.http.post<any>(this.horariosApi+'/guardar/'+registroId, horario, {headers: this.headers_obj});
   }

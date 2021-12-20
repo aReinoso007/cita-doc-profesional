@@ -11,15 +11,18 @@
 <ion-content color="light">
   <div class="seleccion" *ngIf="add === false">
     <h1>Seleccione la clinica</h1>
-    <ion-list>
-      <ion-item>
-        <ion-label>Clinicas</ion-label>
-        <ion-select>
-          <ion-select-option *ngFor="let c of clinicas" [value]="c.clinicaId">{{c.nombreClinica}}</ion-select-option>
-        </ion-select>
-      </ion-item>
+    <form [formGroup]="registroForm"(ngSubmit)="onSubmitRegistro()">
+      <ion-list>
+        <ion-item>
+          <ion-label>Clinicas</ion-label>
+          <ion-select formControlName="clinicaId">
+            <ion-select-option *ngFor="let c of clinicas" [value]="c.clinicaId" >{{c.nombreClinica}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-list>
       <br>
-      <ion-button >Aceptar</ion-button>
+        <ion-button type="submit" (click)="addRegistro()">Aceptar</ion-button>
+    </form>
       <br>
       <h1>O</h1>
       <br>
@@ -27,7 +30,6 @@
       <br>
       <br>
       <ion-button color="success" (click)="setAdd()">Agregar</ion-button>
-    </ion-list>
   </div>
 
   <div class="add-clinica" *ngIf="add === true"> 
