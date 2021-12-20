@@ -59,6 +59,10 @@ const routes: Routes = [
           {
             path:'',
             loadChildren: () => import('./addclinica/addclinica.module').then( m => m.AddclinicaPageModule)
+          },
+          {
+            path: ':id',
+            loadChildren: () => import('./adddireccion/adddireccion.module').then( m => m.AdddireccionPageModule)
           }
         ]
         
@@ -77,10 +81,6 @@ const routes: Routes = [
   {
     path: 'historial',
     loadChildren: () => import('./historial/historial.module').then( m => m.HistorialPageModule)
-  },
-  {
-    path: 'adddireccion',
-    loadChildren: () => import('./adddireccion/adddireccion.module').then( m => m.AdddireccionPageModule)
   }
 ];
 @NgModule({

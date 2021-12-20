@@ -7,6 +7,7 @@ import { ClinicaService } from 'src/app/service/clinica.service';
 import { TokenService } from 'src/app/service/token.service';
 import { FormularioRegistroClinica } from 'src/app/model/formularioRegistroClinica.model';
 import { MedicoService } from 'src/app/service/medico.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-addclinica',
@@ -21,6 +22,7 @@ export class AddclinicaPage implements OnInit {
   add: boolean = false;
   constructor(private clinicaService: ClinicaService, 
     private medicoService: MedicoService,
+    private router: Router,
     private tokenService: TokenService, private location: Location, 
     private formBuilder: FormBuilder, private toastCtrl: ToastController) { 
       this.setFormulario();
@@ -37,8 +39,13 @@ export class AddclinicaPage implements OnInit {
 
   /*Esto es para agregar una nueva clinica */
   addClinica(){
-    this.clinicaService.addClinica(this.clinica).subscribe(res=>{
-      console.log('respuesta: ', res);
+    var id=0;
+    this.clinicaService.addClinica(this.clinica).subscribe((res)=>{
+      this.clinica = new Clinica();
+      id = JSON.parse(JSON.stringify(res));
+      /*Esto es para poder agregar la direccion de la clinica */
+      const url = '/tabs/clinicas/'+id;
+      this.router.navigate([url]);
     }, error=>{
       if(error.status === 201){
         this.presentToastOptions('Exito', 'Clinica registrada con exito');
