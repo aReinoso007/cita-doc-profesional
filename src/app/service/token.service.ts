@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
+import { Storage } from '@capacitor/storage';
 import jwt_decode from 'jwt-decode';
+import { BehaviorSubject } from 'rxjs';
 
 const TOKEN_KEY='AuthToken';
 const USER_ID='AuthUserId';
@@ -11,15 +13,32 @@ const APELLIDO ='AuthApellido';
 })
 export class TokenService {
 
+  isAuthenticated: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(null);
+  token='';
   constructor() { }
+
+  async loadToken(){
+    const token = await Storage.get({key: TOKEN_KEY});
+    if(token && token.value){
+      console.log('set token: ', token.value);
+      this.token = token.value;
+      this.isAuthenticated.next(true);
+    }else{
+      this.isAuthenticated.next(false);
+    }
+  }
 
   public logOut(): void{
     window.sessionStorage.clear();
+    Storage.clear();
+    this.isAuthenticated.next(false);
   }
 
   public setToken(token: string): void{
     window.sessionStorage.removeItem(TOKEN_KEY);
     window.sessionStorage.setItem(TOKEN_KEY, token);
+    Storage.set({key: TOKEN_KEY, value: token});
+    this.isAuthenticated.next(true);
   }
 
   public getToken(): string{

@@ -7,7 +7,7 @@ const routes: Routes = [
   {
     path: 'login',
     loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule),
-    canLoad: [IntroGuard, AutoLoginGuard]
+    canLoad: [IntroGuard]
   },
   {
     path: 'registro',
@@ -20,8 +20,8 @@ const routes: Routes = [
   },
   {
     path: 'tabs',
-    loadChildren: () => import('./pages/tabs/tabs.module').then( m => m.TabsPageModule),
-    canLoad: [AuthGuard]
+    loadChildren: () => import('./pages/tabs/tabs.module').then( m => m.TabsPageModule)
+    //canLoad: [AuthGuard]
   },
   {
     path: '',

@@ -4,7 +4,6 @@ import { Login } from './../model/login.model';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Medico } from '../model/medico.model';
-import { catchError } from 'rxjs/operators';
 
 
 @Injectable({
