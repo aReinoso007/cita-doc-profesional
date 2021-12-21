@@ -14,6 +14,18 @@ const routes: Routes = [
           {
             path: '',
             loadChildren: () => import ('../tabs/cuenta/cuenta.module').then(m=> m.CuentaPageModule)
+          },
+          {
+            path: 'detalle',
+            loadChildren: () => import('./cuentadetalle/cuentadetalle.module').then( m => m.CuentadetallePageModule)
+          },
+          {
+            path: 'especialidades',
+            loadChildren: () => import('./especialidaddetalle/especialidaddetalle.module').then( m => m.EspecialidaddetallePageModule)
+          },
+          {
+            path: 'subespecialidades',
+            loadChildren: () => import('./subespecialidaddetalle/subespecialidaddetalle.module').then( m => m.SubespecialidaddetallePageModule)
           }
         ]
       },
@@ -81,6 +93,10 @@ const routes: Routes = [
   {
     path: 'historial',
     loadChildren: () => import('./historial/historial.module').then( m => m.HistorialPageModule)
+  },
+  {
+    path: 'subespecialidaddetalle',
+    loadChildren: () => import('./subespecialidaddetalle/subespecialidaddetalle.module').then( m => m.SubespecialidaddetallePageModule)
   }
 ];
 @NgModule({

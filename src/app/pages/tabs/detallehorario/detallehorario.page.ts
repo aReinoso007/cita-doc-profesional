@@ -31,6 +31,8 @@ export class DetallehorarioPage implements OnInit {
   }
 
   ngOnInit() {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.router.onSameUrlNavigation = 'reload';
     this.verHorario();
     if(this.swiper){
       this.swiper.updateSwiper({});

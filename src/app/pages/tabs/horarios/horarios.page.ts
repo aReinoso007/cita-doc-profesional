@@ -17,6 +17,8 @@ export class HorariosPage implements OnInit {
               private router: Router) { }
 
   ngOnInit() {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.router.onSameUrlNavigation = 'reload';
     this.getClinicas();
   }
 

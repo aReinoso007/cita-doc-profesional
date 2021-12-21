@@ -1,5 +1,33 @@
 <ion-content color="light">
-  
-
-
+    <ion-list>
+        <ion-list-header>
+          <ion-label>Datos Academicos</ion-label>
+        </ion-list-header>
+        <ion-menu-toggle autoHide="false">
+            <ion-item [routerLink]="['/tabs/cuenta/detalle']">
+                <ion-icon slot="start" src="../../../../assets/app/cuenta.svg"></ion-icon>
+                <ion-label>
+                  Cuenta
+                </ion-label>
+              </ion-item>
+          <ion-item [routerLink]="['/tabs/cuenta/especialidades']">
+            <ion-icon slot="start" src="../../../../assets/app/especialidad.svg"></ion-icon>
+            <ion-label>
+              Especialidades
+            </ion-label>
+          </ion-item>
+          <ion-item [routerLink]="['/tabs/cuenta/subespecialidades']">
+            <ion-icon slot="start" src="../../../../assets/app/subespecialidad.svg"></ion-icon>
+            <ion-label>
+              Subespecialidades
+            </ion-label>
+          </ion-item>
+          <ion-item [routerLink]="['/forms-filters']">
+            <ion-icon slot="start" src="../../../../assets/app/log-out.svg"></ion-icon>
+            <ion-label>
+              Cerrar sesion
+            </ion-label>
+        </ion-item>
+        </ion-menu-toggle>
+      </ion-list>
 </ion-content>
