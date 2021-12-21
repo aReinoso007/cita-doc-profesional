@@ -25,7 +25,7 @@ export class LoginPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    
+    this.verifyUserSignedin();
   }
 
   onLogin(){
@@ -46,7 +46,7 @@ export class LoginPage implements OnInit {
   }
 
   vaciar(){
-
+    
   }
 
   async presentToast() {
@@ -59,7 +59,18 @@ export class LoginPage implements OnInit {
   }
 
   verifyUserSignedin(){
-    if(this.medicoService.getMedico()!=null) this.router.navigateByUrl('/tabs/dashboad');
+    try {
+      if(this.tokenService.getUserId() != null && this.medicoService.getMedico()!=null){
+        this.router.navigateByUrl('/tabs/dashboad')
+      } else if (this.medicoService.getMedico()==null){
+        this.router.navigateByUrl('/login');
+      } 
+    } catch (error) {
+      console.log('No se ha hecho sesion');
+    }
   }
+    
+    
+    
 
 }
