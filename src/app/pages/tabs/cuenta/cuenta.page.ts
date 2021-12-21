@@ -1,4 +1,6 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import { TokenService } from 'src/app/service/token.service';
 
 @Component({
   selector: 'app-cuenta',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CuentaPage implements OnInit {
 
-  constructor() { }
+  constructor(private tokenService: TokenService, private router: Router) { }
 
   ngOnInit() {
+  }
+
+  logOut(){
+    this.tokenService.logOut();
+    this.router.navigateByUrl('/login');
   }
 
 }
