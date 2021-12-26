@@ -1,3 +1,17 @@
 <ion-content color="light">
-
+    <div>
+        <h1>Agregar especialidad</h1>
+        <form [formGroup]="especialidadFormulario" (ngSubmit)="onSubmit()">
+            <ion-list>
+                <ion-item>
+                    <ion-label position="floating">Especialidades</ion-label>
+                    <ion-select>
+                        <ion-select-option   *ngFor="let e of especialidades" [value]="e.especialidadId">{{e.nombre}}</ion-select-option>
+                    </ion-select>
+                </ion-item>
+                <br>
+            </ion-list>
+            <ion-button expand="block" color="success"  type="submit">Aceptar</ion-button>
+        </form>
+    </div>
 </ion-content>
