@@ -14,6 +14,7 @@ import { RegistroEspecialidad } from 'src/app/model/registroEspecialidad.model';
 export class EspecialidaddetallePage implements OnInit {
 
   especialidades: any[]=[];
+  registradas: any[]=[];
   especialidadFormulario: FormGroup;
   submitted: boolean = false;
   registro: RegistroEspecialidad;
@@ -23,6 +24,14 @@ export class EspecialidaddetallePage implements OnInit {
 
   ngOnInit() {
     this.getEspecialidades();
+    this.getEspecialidadesRegistradas();
+  }
+
+  getEspecialidadesRegistradas(){
+    this.academiaService.getEspecialidadesRegistradas().subscribe(data=>{
+      this.registradas = JSON.parse(JSON.stringify(data));
+      console.log('registradas: ', this.registradas);
+    });
   }
 
   getEspecialidades(){
