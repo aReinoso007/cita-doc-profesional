@@ -5,7 +5,7 @@
             <ion-list>
                 <ion-item>
                     <ion-label position="floating">Especialidades</ion-label>
-                    <ion-select>
+                    <ion-select formControlName="especialidadId">
                         <ion-select-option   *ngFor="let e of especialidades" [value]="e.especialidadId">{{e.nombre}}</ion-select-option>
                     </ion-select>
                 </ion-item>
@@ -15,6 +15,6 @@
         </form>
     </div>
     <div>
-        
+
     </div>
 </ion-content>

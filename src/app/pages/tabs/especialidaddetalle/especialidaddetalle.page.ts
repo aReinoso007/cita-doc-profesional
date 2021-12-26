@@ -39,7 +39,15 @@ export class EspecialidaddetallePage implements OnInit {
 
   addRegistro(){
     this.registro = new RegistroEspecialidad(this.tokenService.getUserId(), this.especialidadFormulario.get('especialidadId').value);
-    console.log('Datos a registrar: ', this.registro);
+    this.academiaService.postRegistroEspecialidad(this.registro).subscribe(res=>{
+      console.log('respuesta: ', res);
+    }, error=>{
+      if(error.status === 201){
+        this.presentToastOptions('Exito','Especialidad registrada')
+      }else{
+        this.presentToastOptions('Error', 'Algo salio mal');
+      }
+    })
   }
 
   onSubmit(){
@@ -49,7 +57,7 @@ export class EspecialidaddetallePage implements OnInit {
       this.presentToastOptions('Error','Seleccione una especialidad');
     }else{
       this.addRegistro();
-      this.presentToastOptions('Exito','Especialidad agregada');
+      this.especialidadFormulario.reset();
     }
   }
   async presentToastOptions(header: string, message: string){
