@@ -1,0 +1,58 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start" >
+      <ion-button color="dark" [routerLink]="'/tabs/horario'">
+        <ion-icon slot="icon-only" name="arrow-back" ></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="light">
+  <div class="seleccion" *ngIf="add === false">
+    <h1>Seleccione la clinica</h1>
+    <form [formGroup]="registroForm"(ngSubmit)="onSubmitRegistro()">
+      <ion-list>
+        <ion-item>
+          <ion-label>Clinicas</ion-label>
+          <ion-select formControlName="clinicaId">
+            <ion-select-option *ngFor="let c of clinicas" [value]="c.clinicaId" >{{c.nombreClinica}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-list>
+      <br>
+        <ion-button type="submit">Aceptar</ion-button>
+    </form>
+      <br>
+      <h1>O</h1>
+      <br>
+      <ion-text>Deseas agregar tu propia clinica?</ion-text>
+      <br>
+      <br>
+      <ion-button color="success" (click)="setAdd()">Agregar</ion-button>
+  </div>
+
+  <div class="add-clinica" *ngIf="add === true"> 
+    <h1>Registrar Clinica</h1>
+    <form [formGroup]="clinicaForm" (ngSubmit)="onSubmit()">
+      <ion-item>
+        <ion-label position="floating">Nombre de la clinica</ion-label>
+        <ion-input formControlName="nombre" type="text" [(ngModel)]="clinica.nombreClinica"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Numero contacto</ion-label>
+        <ion-input formControlName="contacto" type="number" [(ngModel)]="clinica.contacto"></ion-input>
+      </ion-item>
+      <br>
+      <ion-row>
+        <ion-col>
+          <ion-button expand="block" color="danger" (click)="setBack()">Cancelar</ion-button>
+        </ion-col>
+        <ion-col>
+          <ion-button type="submit" expand="block" color="success" >registrar</ion-button>
+        </ion-col>
+      </ion-row>
+    </form>
+  </div>
+
+</ion-content>

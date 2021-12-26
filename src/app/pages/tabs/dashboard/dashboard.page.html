@@ -1,9 +1,13 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>dashboard</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content>
-
+<ion-content color="light">
+  <ion-card>
+    <ion-avatar color="light">
+      <img src="../../../../assets/app/medic.png">
+    </ion-avatar>
+    <ion-icon name="information-outline"></ion-icon>
+    <ion-label>{{medico.nombre}} {{medico.apellido}}</ion-label>
+    <h3>{{medico.profesion}}</h3>
+  </ion-card>
+  <div class="header">
+    <h1 style="text-align: center;">Seccion de citas</h1>
+  </div>
 </ion-content>

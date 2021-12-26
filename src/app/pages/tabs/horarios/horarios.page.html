@@ -1,0 +1,19 @@
+<ion-content color="light">
+  <ion-fab vertical="top" horizontal="end" slot="fixed">
+    <ion-fab-button>
+      <ion-icon name="add" [routerLink]="['/tabs/clinicas']"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  <ion-grid>
+    <ion-row class="ion-text-center">
+      <ion-col *ngFor="let item of clinicas">
+        <img class="img-center" src="../../../assets/app/clinica.png" />
+        <ion-item class="ion-text-center" (click)="verHorario(item.clinicaId)">
+          <ion-label >
+            {{item.nombreClinica}}
+          </ion-label>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

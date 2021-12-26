@@ -1,0 +1,18 @@
+.seleccion {
+  text-align: center;
+}
+
+.add-clinica {
+  text-align: center;
+}
+
+ion-select {
+  width: 100%;
+
+  justify-content: center;
+}
+
+ion-select::part(placeholder) {
+  color: #20a08a;
+  opacity: 1;
+}

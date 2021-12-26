@@ -1,0 +1,28 @@
+.img-center {
+  height: 100px !important;
+  width: 100px !important;
+  align-items: center;
+}
+ion-card {
+  align-items: center;
+}
+ion-grid {
+  padding-top: 20%;
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+ion-item {
+  font-weight: 500;
+  background-color: bisque;
+}
+ion-col {
+  --ion-grid-column-padding: 10px;
+  background-color: rgb(215, 246, 250);
+  border-radius: 5%;
+  border-color: rgb(202, 220, 248);
+  border-width: 0.01em;
+  border-style: solid;
+  margin-bottom: -1px;
+  background-color: rgb(169, 241, 247);
+}

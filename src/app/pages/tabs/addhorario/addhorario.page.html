@@ -1,0 +1,42 @@
+<ion-header [translucent]="true"> 
+  <ion-toolbar>
+    <ion-buttons slot="start" >
+      <ion-button color="dark" (click)="goBack()">
+        <ion-icon slot="icon-only" name="arrow-back" ></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content color="light">
+  <ion-list>
+    <ion-list-header>
+      <ion-label>
+        Selecciona el dia y el intervalo de tiempo
+      </ion-label>
+    </ion-list-header>
+
+    <ion-item>
+      <ion-label>Día</ion-label>
+      <ion-select placeholder="Selecciona uno" [(ngModel)]="horario.dia">
+        <ion-select-option value="MONDAY">Lunes</ion-select-option>
+        <ion-select-option value="TUESDAY">Martes</ion-select-option>
+        <ion-select-option value="WEDNESDAY">Miercoles</ion-select-option>
+        <ion-select-option value="THURSDAY">Jueves</ion-select-option>
+        <ion-select-option value="FRIDAY">Viernes</ion-select-option>
+        <ion-select-option value="SATURDAY">Sábado</ion-select-option>
+        <ion-select-option value="SUNDAY">Domingo</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Inicio</ion-label>
+      <ion-datetime displayFormat="HH:mm" [(ngModel)]="horario.inicio"></ion-datetime>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Fin</ion-label>
+      <ion-datetime displayFormat="HH:mm" [(ngModel)]="horario.fin"></ion-datetime>
+    </ion-item>
+  </ion-list>
+  <ion-button expand="block" (click)="addHorario()"> Agregar</ion-button>
+</ion-content>

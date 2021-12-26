@@ -1,0 +1,59 @@
+<ion-header [translucent]="true"> 
+  <ion-toolbar>
+    <ion-buttons slot="start" >
+      <ion-button color="dark" (click)="goBack()">
+        <ion-icon slot="icon-only" name="arrow-back" ></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="light">
+  <swiper #swiper [config]="config" [pagination]="{ clickable: true }" *ngIf="horarios.length <1">
+    <ng-template swiperSlide>
+      <ion-list>
+        <img src="../../../../assets/app/welcome.gif" class="img-center"/>
+        <h1>Bienvenido</h1>
+        <p>
+          En esta sección puedes registrar tus horarios
+          de atención para esta clínica.
+        </p>
+      </ion-list>
+    </ng-template>
+    <ng-template swiperSlide>
+      <ion-list>
+        <img src="../../../../assets/app/horario-add.png" class="img-medium"/>
+        <h1>Es fácil</h1>
+        <p>
+          Selecciona el dia e ingresa el intervalo de horas 
+          que trabajas ese día.
+        </p>
+        <h2>Listo?</h2>
+            <ion-button fill="clear" (click)="goToAdd()">Agregar<ion-icon slot="end" name="arrow-forward"></ion-icon></ion-button>
+      </ion-list>
+    </ng-template>
+  </swiper>
+  <div class="horarios-table" *ngIf="horarios.length >0">
+    <h1 style="text-align: center;">Horario registrado</h1>
+    <ion-grid class="ion-margin">
+      <ion-row>
+        <ion-col>Dia</ion-col>
+        <ion-col>Inicio</ion-col>
+        <ion-col>Fin</ion-col>
+      </ion-row>
+      <ion-row *ngFor="let item of horarios">
+        <ion-col>{{ item.dia }}</ion-col>
+        <ion-col>{{ item.inicio }}</ion-col>
+        <ion-col>{{ item.fin }}</ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+      <ion-fab-button (click)="goToAdd()">
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+  </div>
+</ion-content>
+<!-- 
+  
+-->

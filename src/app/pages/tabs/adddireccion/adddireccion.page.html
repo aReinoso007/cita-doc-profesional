@@ -1,0 +1,44 @@
+
+<ion-content color="light">
+  <div class="formulario">
+    <form [formGroup]="direccionForm" (ngSubmit)="onSubmit()">
+      <h1>Direccion de la clinica</h1>
+      <ion-item>
+        <ion-label position="floating">Pais</ion-label>
+        <ion-select formControlName="pais" [(ngModel)]="direccion.pais">
+          <ion-select-option value="Ecuador">Ecuador</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Provincia</ion-label>
+        <ion-select formControlName="provincia" [(ngModel)]="direccion.provincia">
+          <ion-select-option value="Azuay">Azuay</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Ciudad</ion-label>
+        <ion-select formControlName="ciudad" [(ngModel)]="direccion.ciudad">
+          <ion-select-option value="Cuenca">Cuenca</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Calle Principal</ion-label>
+        <ion-input type="text" formControlName="callePrincipal" [(ngModel)]="direccion.callePrincipal"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Calle Secundaria</ion-label>
+        <ion-input type="text" formControlName="calleSecundaria" [(ngModel)]="direccion.calleSecundaria"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Referencia</ion-label>
+        <ion-textarea type="text" formControlName="referencia" [(ngModel)]="direccion.referencia"></ion-textarea>
+      </ion-item>
+      <ion-row>
+        <ion-col>
+          <ion-button type="submit" expand="block" color="success" >Registrar</ion-button>
+        </ion-col>
+      </ion-row>
+    </form>
+  
+  </div>
+</ion-content>
