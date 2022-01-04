@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TokenService } from 'src/app/service/token.service';
 import { RegistroEspecialidad } from 'src/app/model/registroEspecialidad.model';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-especialidaddetalle',
@@ -14,15 +15,26 @@ import { RegistroEspecialidad } from 'src/app/model/registroEspecialidad.model';
 export class EspecialidaddetallePage implements OnInit {
 
   especialidades: any[]=[];
+  registradas: any[]=[];
   especialidadFormulario: FormGroup;
   submitted: boolean = false;
+  add: boolean  = false;
   registro: RegistroEspecialidad;
-  constructor(private academiaService: AcademiaService, private formBuilder: FormBuilder, private toastCtrl: ToastController, private tokenService: TokenService) { 
+  constructor(private academiaService: AcademiaService, private formBuilder: FormBuilder, 
+    private toastCtrl: ToastController, private tokenService: TokenService,
+    private location: Location) { 
     this.setFormulario();
   }
 
   ngOnInit() {
     this.getEspecialidades();
+    this.getEspecialidadesRegistradas();
+  }
+
+  getEspecialidadesRegistradas(){
+    this.academiaService.getEspecialidadesRegistradas().subscribe(data=>{
+      this.registradas = JSON.parse(JSON.stringify(data));
+    });
   }
 
   getEspecialidades(){
@@ -40,10 +52,11 @@ export class EspecialidaddetallePage implements OnInit {
   addRegistro(){
     this.registro = new RegistroEspecialidad(this.tokenService.getUserId(), this.especialidadFormulario.get('especialidadId').value);
     this.academiaService.postRegistroEspecialidad(this.registro).subscribe(res=>{
-      console.log('respuesta: ', res);
     }, error=>{
       if(error.status === 201){
         this.presentToastOptions('Exito','Especialidad registrada')
+        this.setBack();
+        this.getEspecialidadesRegistradas();
       }else{
         this.presentToastOptions('Error', 'Algo salio mal');
       }
@@ -68,6 +81,18 @@ export class EspecialidaddetallePage implements OnInit {
       duration: 2000
     });
     await toast.present();
+  }
+
+  setAdd(){
+    this.add = true;
+  }
+
+  setBack(){
+    this.add = false;
+  }
+
+  goBack(){
+    this.location.back();
   }
 
 }
