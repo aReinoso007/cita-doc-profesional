@@ -43,7 +43,7 @@
         <ion-list>
             <ion-item *ngFor="let e of registradas">
                 <ion-icon name="ribbon-outline"></ion-icon>
-                <ion-label>
+                <ion-label (click)="verSubespecialidades(e.especialidadId)">
                     <ion-text>{{e.nombre}}</ion-text>
                 </ion-label>
             </ion-item>

@@ -20,9 +20,10 @@ export class EspecialidaddetallePage implements OnInit {
   submitted: boolean = false;
   add: boolean  = false;
   registro: RegistroEspecialidad;
+
   constructor(private academiaService: AcademiaService, private formBuilder: FormBuilder, 
     private toastCtrl: ToastController, private tokenService: TokenService,
-    private location: Location) { 
+    private location: Location, private router: Router) { 
     this.setFormulario();
   }
 
@@ -93,6 +94,11 @@ export class EspecialidaddetallePage implements OnInit {
 
   goBack(){
     this.location.back();
+  }
+
+  verSubespecialidades(especialidadId: string){
+    const url = '/tabs/cuenta/especialidades/'+especialidadId;
+    this.router.navigate([url]);
   }
 
 }
