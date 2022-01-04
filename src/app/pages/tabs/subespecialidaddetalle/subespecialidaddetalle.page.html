@@ -16,6 +16,14 @@
               <ion-icon name="add"></ion-icon>
             </ion-fab-button>
         </ion-fab>
+        <ion-list>
+            <ion-item *ngFor="let s of registradas">
+                <ion-icon name="ribbon-outline"></ion-icon>
+                <ion-label>
+                    <ion-text>{{s.nombre}}</ion-text>
+                </ion-label>
+            </ion-item>
+        </ion-list>
     </div>
 
     <div class="lista" *ngIf="add === true">

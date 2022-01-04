@@ -91,7 +91,8 @@ export class SubespecialidaddetallePage implements OnInit {
     console.log('a enviar: ', this.registro);
     this.academiaService.postRegistroSubespecialidad(this.registro).subscribe(res=>{
     }, error=>{
-      if(error === 201){
+      console.log('error', error)
+      if(error.status === 201){
         this.presentToastOptions('Exito','Registro exitoso');
         this.getSubespecialidadesRegistradas();
         this.setBack();
