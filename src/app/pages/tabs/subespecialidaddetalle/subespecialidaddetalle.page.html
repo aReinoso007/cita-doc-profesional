@@ -1,3 +1,35 @@
+<ion-header [translucent]="true"> 
+    <ion-toolbar>
+      <ion-buttons slot="start" >
+        <ion-button color="dark" (click)="goBack()">
+          <ion-icon slot="icon-only" name="arrow-back" ></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
 <ion-content color="light">
+    <div class="lista" *ngIf="add === false">
+        <h1>Subespecialidades</h1>
+        <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+            <ion-fab-button (click)="setAdd()">
+              <ion-icon name="add"></ion-icon>
+            </ion-fab-button>
+        </ion-fab>
+    </div>
+
+    <div class="lista" *ngIf="add === true">
+        <h1>Agregar</h1>
+        <form [formGroup]="subespecialidadFormulario" (ngSubmit)="onSubmit()">
+            <ion-list>
+                <ion-item>
+                    <ion-label position="floating">Subespecialidades</ion-label>
+                    <ion-select formControlName="subespId">
+                        <ion-select-option *ngFor="let s of subespecialidades">{{s.nombre}}</ion-select-option>
+                    </ion-select>
+                </ion-item>
+            </ion-list>
+        </form>
+    </div>
 
 </ion-content>

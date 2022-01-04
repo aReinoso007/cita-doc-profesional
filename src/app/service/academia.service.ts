@@ -33,14 +33,13 @@ export class AcademiaService {
 
   /*Obtener las especialidades registradas por el medico */
   getEspecialidadesRegistradas(): Observable<any>{
-    const opts = {params: new HttpParams({})}
     return this.http.get(this.especialidadAPI+'/registradas/'+this.tokenService.getUserId(), {headers: this.headers_obj})
   }
 
 
   /*Obtiene las subespecialidades no registradas por el medico */
-  getSubespecialidades(){
-
+  getSubespecialidades(espId: string): Observable<any>{
+    return this.http.get(this.subespecialidadAPI+'/disponibles/'+this.tokenService.getUserId()+'/'+Number(espId), {headers: this.headers_obj})
   }
 
 }
