@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { TokenService } from './token.service';
 import { Especialidad } from '../model/especialidad.model';
+import { RegistroSubespecialidad } from '../model/RegistroSubespecialidad.model';
 
 @Injectable({
   providedIn: 'root'
@@ -42,4 +43,11 @@ export class AcademiaService {
     return this.http.get(this.subespecialidadAPI+'/disponibles/'+this.tokenService.getUserId()+'/'+Number(espId), {headers: this.headers_obj})
   }
 
+  getSubespecialidadesRegistradasPorEspecialidad(espId: string): Observable<any>{
+    return this.http.get(this.subespecialidadAPI+'/registradas/'+this.tokenService.getUserId()+'/'+Number(espId), {headers: this.headers_obj})
+  }
+
+  postRegistroSubespecialidad(formulario: RegistroSubespecialidad): Observable<any>{
+    return this.http.post(this.registroSubEsAPI, formulario, {headers: this.headers_obj});
+  }
 }

@@ -1,9 +1,11 @@
+import { RegistroSubespecialidad } from './../../../model/RegistroSubespecialidad.model';
 import { ActivatedRoute } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { AcademiaService } from 'src/app/service/academia.service';
 import { Location } from '@angular/common';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { TokenService } from 'src/app/service/token.service';
 
 @Component({
   selector: 'app-subespecialidaddetalle',
@@ -15,22 +17,33 @@ export class SubespecialidaddetallePage implements OnInit {
   especialidadId: string;
   subespecialidades: any[]=[];
   registradas: any[]=[];
+  registro: RegistroSubespecialidad;
   add: boolean = false;
   submitted: boolean = false;
   subespecialidadFormulario: FormGroup;
+
   constructor(private academiaService: AcademiaService, private toastCtrl: ToastController,
-    private route: ActivatedRoute, private location: Location, private formBuilder: FormBuilder) {
+    private route: ActivatedRoute, private location: Location, private formBuilder: FormBuilder,
+    private tokenService: TokenService) {
       this.setFormulario();
       this.especialidadId = this.route.snapshot.paramMap.get('id');
     }
 
   ngOnInit() {
     this.getSubespecialidades();
+    this.getSubespecialidadesRegistradas();
   }
 
   getSubespecialidades(){
     this.academiaService.getSubespecialidades(this.especialidadId).subscribe(data=>{
       this.subespecialidades = JSON.parse(JSON.stringify(data));
+    })
+  }
+
+  getSubespecialidadesRegistradas(){
+    this.academiaService.getSubespecialidadesRegistradasPorEspecialidad(this.especialidadId).subscribe(data=>{
+      this.registradas = JSON.parse(JSON.stringify(data));
+      console.log('registradas: ', this.registradas);
     })
   }
 
@@ -40,7 +53,8 @@ export class SubespecialidaddetallePage implements OnInit {
       this.submitted = false;
       this.presentToastOptions('Error','Seleccione una subespecialidad');
     }else{
-      this.presentToastOptions('Exito','Subespecialidad agregada con exito');
+      this.addSubespecialdidad();
+      this.subespecialidadFormulario.reset();
     }
   }
 
@@ -73,7 +87,18 @@ export class SubespecialidaddetallePage implements OnInit {
   }
 
   addSubespecialdidad(){
-
+    this.registro = new RegistroSubespecialidad(this.tokenService.getUserId(), Number(this.subespecialidadFormulario.get('subespId').value));
+    console.log('a enviar: ', this.registro);
+    this.academiaService.postRegistroSubespecialidad(this.registro).subscribe(res=>{
+    }, error=>{
+      if(error === 201){
+        this.presentToastOptions('Exito','Registro exitoso');
+        this.getSubespecialidadesRegistradas();
+        this.setBack();
+      }else{
+        this.presentToastOptions('Error','Algo salió mal');
+      }
+    })
   }
 
 }
