@@ -6,6 +6,7 @@ import { AcademiaService } from 'src/app/service/academia.service';
 import { Location } from '@angular/common';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { TokenService } from 'src/app/service/token.service';
+import { IonItemSliding } from '@ionic/angular';
 
 @Component({
   selector: 'app-subespecialidaddetalle',
@@ -27,11 +28,16 @@ export class SubespecialidaddetallePage implements OnInit {
     private tokenService: TokenService) {
       this.setFormulario();
       this.especialidadId = this.route.snapshot.paramMap.get('id');
+      
     }
 
   ngOnInit() {
     this.getSubespecialidades();
     this.getSubespecialidadesRegistradas();
+  }
+
+  share(slidingItem: IonItemSliding) {
+    slidingItem.close();
   }
 
   getSubespecialidades(){
@@ -100,6 +106,14 @@ export class SubespecialidaddetallePage implements OnInit {
         this.presentToastOptions('Error','Algo salió mal');
       }
     })
+  }
+
+  deleteSubespecialidad(subId: number){
+    console.log('id ', subId);
+    this.academiaService.postDeleteRegistroSubEspecialidad(subId).subscribe(res=>{
+      console.log('respuesta: ', res);
+    })
+    this.getSubespecialidadesRegistradas();
   }
 
 }

@@ -31,7 +31,6 @@ export class CuentadetallePage implements OnInit {
   getData(){
     this.medicoService.getMedico().subscribe(data=>{
       this.medico = JSON.parse(JSON.stringify(data));
-      console.log(this.medico);
     })
   }
 
