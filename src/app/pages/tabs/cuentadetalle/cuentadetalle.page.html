@@ -1,3 +1,84 @@
+<ion-header [translucent]="true"> 
+    <ion-toolbar>
+      <ion-buttons slot="start" >
+        <ion-button color="dark" (click)="goBack()">
+          <ion-icon slot="icon-only" name="arrow-back" ></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+</ion-header>
 <ion-content color="light">
+    <ion-card color="light" class="perfil">
+        <div class="img-wrapper">
+          <img src="./assets/app/medic.png" />
+        </div>
+        <ion-card-content class="ion-text-center">
+          <h2>{{medico.nombre}}</h2>
+          <h2>{{medico.apellido}}</h2>
+          <ion-text color="medium">
+            <div style="display: flex;" class="ion-justify-content-center">
+              <ion-icon name="school-outline" color="medium">
+              </ion-icon>
+              <p>{{medico.profesion}}</p>
+            </div>
+          </ion-text>
+        </ion-card-content>
+      </ion-card>
+      <ion-card>
+          <ion-card-header>
+              <ion-row>
+                  <ion-col>
+                      <ion-text>Slogan</ion-text>
+                  </ion-col>
+                  <ion-buttons>
+                    <ion-button color="light" (click)="alertEditSlogan()">
+                        <ion-icon slot="icon-only" name="create-outline" color="medium" size="small">
+                        </ion-icon>
+                    </ion-button>
+                </ion-buttons>
+              </ion-row>
+          </ion-card-header>
+          <ion-card-content>
+              <ion-text>{{medico.slogan}}</ion-text>
+          </ion-card-content>
+      </ion-card>
+      <ion-card>
+        <ion-card-header>
+            <ion-row>
+                <ion-col>
+                    <ion-text>Descripción</ion-text>
+                </ion-col>
+                <ion-buttons>
+                    <ion-button color="light" (click)="alertEditDesc()">
+                        <ion-icon slot="icon-only" name="create-outline" color="medium" size="small">
+                        </ion-icon>
+                    </ion-button>
+                </ion-buttons>
+            </ion-row>
+        </ion-card-header>
+        <ion-card-content>
+            <ion-text>{{medico.descripcion}}</ion-text>
+        </ion-card-content>
+    </ion-card>
 
+    <ion-card>
+        <ion-card-header>
+            <ion-row>
+                <ion-col>
+                    <ion-text>Contacto</ion-text>
+                </ion-col>
+                <ion-buttons>
+                    <ion-button color="light" (click)="alertEditContacto()">
+                        <ion-icon slot="icon-only" name="create-outline" color="medium" size="small">
+                        </ion-icon>
+                    </ion-button>
+                </ion-buttons>
+            </ion-row>
+        </ion-card-header>
+        <ion-card-content>
+            <ion-icon name="call-outline"></ion-icon>
+            <ion-text> {{medico.numeroContacto}}</ion-text>
+        </ion-card-content>
+    </ion-card>
+   
 </ion-content>
