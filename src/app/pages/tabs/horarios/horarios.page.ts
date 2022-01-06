@@ -22,6 +22,10 @@ export class HorariosPage implements OnInit {
     this.getClinicas();
   }
 
+  ionViewWillEnter(){
+    this.getClinicas();
+  }
+
   getClinicas(){
     this.medicoService.getClinicasMedico().subscribe((data: Clinica)=>{
         this.clinicas = JSON.parse(JSON.stringify(data));
