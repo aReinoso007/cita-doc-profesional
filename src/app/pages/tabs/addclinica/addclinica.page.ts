@@ -37,6 +37,10 @@ export class AddclinicaPage implements OnInit {
     this.getClinicasDisponibles();
   }
 
+  ionViewWillEnter(){
+    this.getClinicasDisponibles();
+  } 
+
   /*Esto es para agregar una nueva clinica */
   addClinica(){
     var id=0;
@@ -48,6 +52,7 @@ export class AddclinicaPage implements OnInit {
       this.router.navigate([url]);
     }, error=>{
       if(error.status === 201){
+        this.getClinicasDisponibles();
         this.presentToastOptions('Exito', 'Clinica registrada con exito');
       }else{
         this.presentToastOptions('Error', 'Algo salio mal');
@@ -60,6 +65,7 @@ export class AddclinicaPage implements OnInit {
     this.medicoService.postRegistroClinicaMedico(this.formulario).subscribe(res=>{
     }, error=>{
       if(error.status === 201){
+        this.getClinicasDisponibles();
         this.presentToastOptions('Exito','Clinica agregada con exito');
       }else{
         this.presentToastOptions('Oh no!', 'Algo salio mal');
