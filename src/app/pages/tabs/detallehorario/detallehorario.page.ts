@@ -71,7 +71,7 @@ export class DetallehorarioPage implements OnInit {
 
   deleteHorario(hId: number){
     this.medicoService.deleteHorario(hId).subscribe(res=>{
-      this.presentToastOptions('Exito','Registro eliminado con exito');
+      this.presentToastOptions('¡Éxito!','Registro eliminado con éxito');
       this.verHorario();
     });
   }

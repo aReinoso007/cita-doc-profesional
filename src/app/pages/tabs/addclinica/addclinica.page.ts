@@ -47,16 +47,10 @@ export class AddclinicaPage implements OnInit {
     this.clinicaService.addClinica(this.clinica).subscribe((res)=>{
       this.clinica = new Clinica();
       id = JSON.parse(JSON.stringify(res));
+      this.addClinicaToRegistro(id);
       /*Esto es para poder agregar la direccion de la clinica */
       const url = '/tabs/clinicas/'+id;
       this.router.navigate([url]);
-    }, error=>{
-      if(error.status === 201){
-        this.getClinicasDisponibles();
-        this.presentToastOptions('Exito', 'Clinica registrada con exito');
-      }else{
-        this.presentToastOptions('Error', 'Algo salio mal');
-      }
     });
   }
 
@@ -66,9 +60,22 @@ export class AddclinicaPage implements OnInit {
     }, error=>{
       if(error.status === 201){
         this.getClinicasDisponibles();
-        this.presentToastOptions('Exito','Clinica agregada con exito');
+        this.presentToastOptions('¡Éxito!','Clínica agregada con éxito');
       }else{
-        this.presentToastOptions('Oh no!', 'Algo salio mal');
+        this.presentToastOptions('¡Oh no!', 'Algo salió mal');
+      }
+    });
+  }
+
+  addClinicaToRegistro(clinicaId: number){
+    this.formulario = new FormularioRegistroClinica(clinicaId, this.tokenService.getUserId());
+    this.medicoService.postRegistroClinicaMedico(this.formulario).subscribe(res=>{
+    }, error=>{
+      if(error.status === 201){
+        this.getClinicasDisponibles();
+        this.presentToastOptions('¡Éxito!','Clínica agregada con éxito');
+      }else{
+        this.presentToastOptions('¡Oh no!', 'Algo salió mal');
       }
     });
   }
@@ -114,7 +121,7 @@ export class AddclinicaPage implements OnInit {
     this.submitted2 = true;
     if(!this.registroForm.valid){
       this.submitted2 = false;
-      this.presentToastOptions('Error', 'Debe seleccionar una clinica');
+      this.presentToastOptions('¡Oops!', 'Debe seleccionar una clínica');
     }else{
       this.addRegistro();
       this.registroForm.reset();
@@ -125,7 +132,7 @@ export class AddclinicaPage implements OnInit {
     this.submitted = true;
     if(!this.clinicaForm.valid){
       this.submitted = false;
-      this.presentToastOptions('Error', 'Debe llenar el formulario');
+      this.presentToastOptions('¡Oops!', 'Debe llenar el formulario');
     }else{
       this.addClinica();
       this.add = false;
