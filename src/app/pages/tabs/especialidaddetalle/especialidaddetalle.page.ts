@@ -57,6 +57,7 @@ export class EspecialidaddetallePage implements OnInit {
       if(error.status === 201){
         this.presentToastOptions('Exito','Especialidad registrada')
         this.setBack();
+        this.getEspecialidades();
         this.getEspecialidadesRegistradas();
       }else{
         this.presentToastOptions('Error', 'Algo salio mal');
