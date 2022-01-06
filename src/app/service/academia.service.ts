@@ -51,8 +51,12 @@ export class AcademiaService {
     return this.http.post(this.registroSubEsAPI, formulario, {headers: this.headers_obj});
   }
 
-  postDeleteRegistroSubEspecialidad(subId: number): Observable<any>{
-    return this.http.post(this.registroSubEsAPI+'/delete/'+this.tokenService.getUserId()+'/'+subId, {headers: this.headers_obj});
+  postDeleteRegistroSubEspecialidad(regId: number): Observable<any>{
+    return this.http.post(this.registroSubEsAPI+'/delete',regId, {headers: this.headers_obj});
+  }
+
+  getSubespecialidadRegistroId(subId: number): Observable<any>{
+    return this.http.get(this.registroSubEsAPI+'/registro/'+this.tokenService.getUserId()+'/'+subId, {headers: this.headers_obj});
   }
 
 }

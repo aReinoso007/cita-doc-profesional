@@ -100,6 +100,7 @@ export class SubespecialidaddetallePage implements OnInit {
       console.log('error', error)
       if(error.status === 201){
         this.presentToastOptions('Exito','Registro exitoso');
+        this.getSubespecialidades();
         this.getSubespecialidadesRegistradas();
         this.setBack();
       }else{
@@ -109,11 +110,15 @@ export class SubespecialidaddetallePage implements OnInit {
   }
 
   deleteSubespecialidad(subId: number){
-    console.log('id ', subId);
-    this.academiaService.postDeleteRegistroSubEspecialidad(subId).subscribe(res=>{
-      console.log('respuesta: ', res);
-    })
-    this.getSubespecialidadesRegistradas();
+
+    this.academiaService.getSubespecialidadRegistroId(subId).subscribe(data=>{
+      this.academiaService.postDeleteRegistroSubEspecialidad(Number(data)).subscribe(res=>{
+        console.log('res: ', res)
+        this.getSubespecialidadesRegistradas();
+      });
+    });
+    this.getSubespecialidades();
   }
+
 
 }
