@@ -1,3 +1,56 @@
+<ion-header [translucent]="true"> 
+    <ion-toolbar>
+      <ion-buttons slot="start" >
+        <ion-button color="dark" (click)="goBack()">
+          <ion-icon slot="icon-only" name="arrow-back" ></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
 <ion-content color="light">
+    <div class="lista" *ngIf="add === false">
+        <h1>Subespecialidades</h1>
+        <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+            <ion-fab-button (click)="setAdd()">
+              <ion-icon name="add"></ion-icon>
+            </ion-fab-button>
+        </ion-fab>
+        <ion-list>
+            <ion-item-sliding *ngFor="let s of registradas">
+                <ion-item >
+                    <ion-icon name="ribbon-outline"></ion-icon>
+                    <ion-label>
+                        <ion-text>{{s.nombre}}</ion-text>
+                    </ion-label>
+                </ion-item>
+                <ion-item-options>
+                    <ion-item-option color="danger" (click)="deleteSubespecialidad(s.subespecialidadId)">Eliminar</ion-item-option>
+                  </ion-item-options>
+            </ion-item-sliding>
+        </ion-list>
+    </div>
+
+    <div class="lista" *ngIf="add === true">
+        <h1>Agregar</h1>
+        <form [formGroup]="subespecialidadFormulario" (ngSubmit)="onSubmit()">
+            <ion-list>
+                <ion-item>
+                    <ion-label position="floating">Subespecialidades</ion-label>
+                    <ion-select formControlName="subespId">
+                        <ion-select-option *ngFor="let s of subespecialidades" [value]="s.subespecialidadId">{{s.nombre}}</ion-select-option>
+                    </ion-select>
+                </ion-item>
+            </ion-list>
+            <ion-row>
+                <ion-col>
+                    <ion-button expand="block" color="danger" (click)="setBack()">Cancelar</ion-button>
+                </ion-col>
+                <ion-col>
+                    <ion-button expand="block" color="success"  type="submit">Aceptar</ion-button>
+                </ion-col>
+            </ion-row>
+        </form>
+    </div>
 
 </ion-content>

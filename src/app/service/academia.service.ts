@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { TokenService } from './token.service';
 import { Especialidad } from '../model/especialidad.model';
+import { RegistroSubespecialidad } from '../model/RegistroSubespecialidad.model';
 
 @Injectable({
   providedIn: 'root'
@@ -33,14 +34,37 @@ export class AcademiaService {
 
   /*Obtener las especialidades registradas por el medico */
   getEspecialidadesRegistradas(): Observable<any>{
-    const opts = {params: new HttpParams({})}
     return this.http.get(this.especialidadAPI+'/registradas/'+this.tokenService.getUserId(), {headers: this.headers_obj})
   }
 
 
   /*Obtiene las subespecialidades no registradas por el medico */
-  getSubespecialidades(){
+  getSubespecialidades(espId: string): Observable<any>{
+    return this.http.get(this.subespecialidadAPI+'/disponibles/'+this.tokenService.getUserId()+'/'+Number(espId), {headers: this.headers_obj})
+  }
 
+  getSubespecialidadesRegistradasPorEspecialidad(espId: string): Observable<any>{
+    return this.http.get(this.subespecialidadAPI+'/registradas/'+this.tokenService.getUserId()+'/'+Number(espId), {headers: this.headers_obj})
+  }
+
+  postRegistroSubespecialidad(formulario: RegistroSubespecialidad): Observable<any>{
+    return this.http.post(this.registroSubEsAPI, formulario, {headers: this.headers_obj});
+  }
+
+  postDeleteRegistroSubEspecialidad(regId: number): Observable<any>{
+    return this.http.post(this.registroSubEsAPI+'/delete',regId, {headers: this.headers_obj});
+  }
+
+  getSubespecialidadRegistroId(subId: number): Observable<any>{
+    return this.http.get(this.registroSubEsAPI+'/registro/'+this.tokenService.getUserId()+'/'+subId, {headers: this.headers_obj});
+  }
+
+  getEspecialidadRegistroId(espId: number): Observable<any>{
+    return this.http.get(this.registroEspeAPI+'/registro/'+this.tokenService.getUserId()+'/'+espId, {headers: this.headers_obj});
+  }
+
+  postDeleteRegistroEsp(espId: number): Observable<any>{
+    return this.http.post(this.registroEspeAPI+'/delete', espId, {headers: this.headers_obj});
   }
 
 }

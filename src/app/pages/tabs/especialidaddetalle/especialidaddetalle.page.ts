@@ -20,9 +20,10 @@ export class EspecialidaddetallePage implements OnInit {
   submitted: boolean = false;
   add: boolean  = false;
   registro: RegistroEspecialidad;
+
   constructor(private academiaService: AcademiaService, private formBuilder: FormBuilder, 
     private toastCtrl: ToastController, private tokenService: TokenService,
-    private location: Location) { 
+    private location: Location, private router: Router) { 
     this.setFormulario();
   }
 
@@ -56,6 +57,7 @@ export class EspecialidaddetallePage implements OnInit {
       if(error.status === 201){
         this.presentToastOptions('Exito','Especialidad registrada')
         this.setBack();
+        this.getEspecialidades();
         this.getEspecialidadesRegistradas();
       }else{
         this.presentToastOptions('Error', 'Algo salio mal');
@@ -93,6 +95,24 @@ export class EspecialidaddetallePage implements OnInit {
 
   goBack(){
     this.location.back();
+  }
+
+  verSubespecialidades(especialidadId: string){
+    const url = '/tabs/cuenta/especialidades/'+especialidadId;
+    this.router.navigate([url]);
+  }
+
+  verificarDatosEnRegistro(espId: number){
+
+    var dat =[];
+    this.academiaService.getSubespecialidadesRegistradasPorEspecialidad(espId.toString()).subscribe(data=>{
+      dat = JSON.parse(JSON.stringify(data));
+      if(dat.length > 0){
+        this.presentToastOptions('Oops','Tienes datos registrados con esta especialidad');
+      }else{
+        
+      }
+    })
   }
 
 }

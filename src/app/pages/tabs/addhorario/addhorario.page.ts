@@ -22,7 +22,6 @@ export class AddhorarioPage implements OnInit {
   }
 
   ngOnInit() {
-    console.log('RegistroId: ', this.registroId);
   }
 
   async addHorario(){

@@ -21,12 +21,17 @@ const routes: Routes = [
           },
           {
             path: 'especialidades',
-            loadChildren: () => import('./especialidaddetalle/especialidaddetalle.module').then( m => m.EspecialidaddetallePageModule)
+            children:[
+              {
+                path:'',
+                loadChildren: () => import('./especialidaddetalle/especialidaddetalle.module').then( m => m.EspecialidaddetallePageModule)
+              },
+              {
+                path: ':id',
+                loadChildren: () => import('./subespecialidaddetalle/subespecialidaddetalle.module').then( m => m.SubespecialidaddetallePageModule)
+              }
+            ]
           },
-          {
-            path: 'subespecialidades',
-            loadChildren: () => import('./subespecialidaddetalle/subespecialidaddetalle.module').then( m => m.SubespecialidaddetallePageModule)
-          }
         ]
       },
       {

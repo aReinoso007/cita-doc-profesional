@@ -1,3 +1,4 @@
+import { FormularioUpdateMedico } from './../model/formularioMedicoUpdate.model';
 import { Horario } from './../model/horario.model';
 import { TokenService } from './token.service';
 import { Observable } from 'rxjs';
@@ -29,6 +30,9 @@ export class MedicoService {
     return this.http.get<Medico>(this.medicoApi+'/'+this.tokenService.getUserId(),{headers: this.headers_obj});
   }
 
+  postEditMedico(form: FormularioUpdateMedico): Observable<any>{
+    return this.http.post(this.medicoApi+'/update/'+this.tokenService.getUserId(),form ,{headers: this.headers_obj});
+  }
   
   /*Devuelve el id del registro con el id del medico y la clinica
     esto sirve para poder listar los horarios de esa clinica, agregar, editar o borrar */
@@ -60,4 +64,6 @@ export class MedicoService {
   getHorariosOrdenados(registroId: number): Observable<Horario[]>{
     return this.http.get<Horario[]>(this.horariosApi+'/horario_ordenado/'+registroId, {headers: this.headers_obj});
   }
+  
+
 }
