@@ -3,7 +3,6 @@ import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { TokenService } from './token.service';
-import { Especialidad } from '../model/especialidad.model';
 import { RegistroSubespecialidad } from '../model/RegistroSubespecialidad.model';
 
 @Injectable({
@@ -63,8 +62,8 @@ export class AcademiaService {
     return this.http.get(this.registroEspeAPI+'/registro/'+this.tokenService.getUserId()+'/'+espId, {headers: this.headers_obj});
   }
 
-  postDeleteRegistroEsp(espId: number): Observable<any>{
-    return this.http.post(this.registroEspeAPI+'/delete', espId, {headers: this.headers_obj});
+  postDeleteRegistroEsp(regId: number): Observable<any>{
+    return this.http.post(this.registroEspeAPI+'/delete', regId, {headers: this.headers_obj});
   }
 
 }

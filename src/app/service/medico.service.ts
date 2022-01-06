@@ -65,5 +65,8 @@ export class MedicoService {
     return this.http.get<Horario[]>(this.horariosApi+'/horario_ordenado/'+registroId, {headers: this.headers_obj});
   }
   
+  deleteHorario(horarioId: number): Observable<any>{
+    return this.http.post(this.horariosApi+'/delete',horarioId, {headers: this.headers_obj});
+  }
 
 }

@@ -110,8 +110,18 @@ export class EspecialidaddetallePage implements OnInit {
       if(dat.length > 0){
         this.presentToastOptions('Oops','Tienes datos registrados con esta especialidad');
       }else{
-        
+        this.academiaService.getEspecialidadRegistroId(espId).subscribe(res=>{
+          this.deleteRegistroEspecialidad(Number(res));
+        });
       }
+    })
+  }
+
+  deleteRegistroEspecialidad(regId: number){
+    this.academiaService.postDeleteRegistroEsp(regId).subscribe(res=>{
+      this.getEspecialidadesRegistradas();
+      this.getEspecialidades();
+      this.presentToastOptions('Exito', 'Registro eliminado con exito');
     })
   }
 

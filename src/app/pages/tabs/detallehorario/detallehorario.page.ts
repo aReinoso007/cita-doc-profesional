@@ -1,4 +1,4 @@
-import { Horario } from './../../../model/horario.model';
+import { NavController, ToastController } from '@ionic/angular';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MedicoService } from 'src/app/service/medico.service';
@@ -25,9 +25,10 @@ export class DetallehorarioPage implements OnInit {
   horarios: any[]=[];
   constructor(private tokenService: TokenService, private medicoService: MedicoService,
   private route: ActivatedRoute, private location: Location,
-  private router: Router) { 
+  private router: Router,
+  private toastCtrl: ToastController,
+  public navCtrl: NavController) { 
     this.clinicaId = this.route.snapshot.paramMap.get('id');
-    this.verHorario();
   }
 
   ngOnInit() {
@@ -36,8 +37,11 @@ export class DetallehorarioPage implements OnInit {
     this.verHorario();
     if(this.swiper){
       this.swiper.updateSwiper({});
-    }
-    
+    }  
+  }
+
+  ionViewWillEnter(){
+   this.verHorario();
   }
 
   verHorario(){
@@ -65,4 +69,20 @@ export class DetallehorarioPage implements OnInit {
     });
   }
 
+  deleteHorario(hId: number){
+    this.medicoService.deleteHorario(hId).subscribe(res=>{
+      this.presentToastOptions('Exito','Registro eliminado con exito');
+      this.verHorario();
+    });
+  }
+
+  async presentToastOptions(header: string, message: string){
+    const toast = await this.toastCtrl.create({
+      header: header,
+      message: message,
+      position: 'top',
+      duration: 2000
+    });
+    await toast.present();
+  }
 }
