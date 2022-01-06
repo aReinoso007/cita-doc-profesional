@@ -1,5 +1,4 @@
 import { ToastController } from '@ionic/angular';
-import { Horario } from './../../../model/horario.model';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MedicoService } from 'src/app/service/medico.service';
