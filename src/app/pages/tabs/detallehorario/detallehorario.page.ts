@@ -85,12 +85,4 @@ export class DetallehorarioPage implements OnInit {
     });
     await toast.present();
   }
-
-  reloadPage(){
-    let currentURL = this.router.url;
-    this.router.routeReuseStrategy.shouldReuseRoute =()=> false;
-    this.router.onSameUrlNavigation = 'reload';
-    this.router.navigate([currentURL]);
-  }
-
 }
