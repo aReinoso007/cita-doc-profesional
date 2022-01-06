@@ -3,7 +3,6 @@ import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { TokenService } from './token.service';
-import { Especialidad } from '../model/especialidad.model';
 import { RegistroSubespecialidad } from '../model/RegistroSubespecialidad.model';
 
 @Injectable({
