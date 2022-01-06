@@ -1,4 +1,4 @@
-import { ToastController } from '@ionic/angular';
+import { NavController, ToastController } from '@ionic/angular';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MedicoService } from 'src/app/service/medico.service';
@@ -26,7 +26,8 @@ export class DetallehorarioPage implements OnInit {
   constructor(private tokenService: TokenService, private medicoService: MedicoService,
   private route: ActivatedRoute, private location: Location,
   private router: Router,
-  private toastCtrl: ToastController) { 
+  private toastCtrl: ToastController,
+  public navCtrl: NavController) { 
     this.clinicaId = this.route.snapshot.paramMap.get('id');
   }
 
@@ -36,7 +37,11 @@ export class DetallehorarioPage implements OnInit {
     this.verHorario();
     if(this.swiper){
       this.swiper.updateSwiper({});
-    }    
+    }  
+  }
+
+  ionViewWillEnter(){
+   this.verHorario();
   }
 
   verHorario(){
@@ -79,6 +84,13 @@ export class DetallehorarioPage implements OnInit {
       duration: 2000
     });
     await toast.present();
+  }
+
+  reloadPage(){
+    let currentURL = this.router.url;
+    this.router.routeReuseStrategy.shouldReuseRoute =()=> false;
+    this.router.onSameUrlNavigation = 'reload';
+    this.router.navigate([currentURL]);
   }
 
 }
