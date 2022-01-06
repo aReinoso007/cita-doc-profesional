@@ -102,4 +102,17 @@ export class EspecialidaddetallePage implements OnInit {
     this.router.navigate([url]);
   }
 
+  verificarDatosEnRegistro(espId: number){
+
+    var dat =[];
+    this.academiaService.getSubespecialidadesRegistradasPorEspecialidad(espId.toString()).subscribe(data=>{
+      dat = JSON.parse(JSON.stringify(data));
+      if(dat.length > 0){
+        this.presentToastOptions('Oops','Tienes datos registrados con esta especialidad');
+      }else{
+        
+      }
+    })
+  }
+
 }
