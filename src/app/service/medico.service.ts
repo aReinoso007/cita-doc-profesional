@@ -17,7 +17,7 @@ import { FormularioRegistroClinica } from '../model/formularioRegistroClinica.mo
 
 export class MedicoService {
   medicoApi   = 'http://localhost:8090/api/private/medico';
-  registroApi = 'http://localhost:8090/api/public/registro_clinica';
+  registroApi = 'http://localhost:8090/api/private/registro_clinica';
   clinicasApi = 'http://localhost:8090/api/public/clinica';
   horariosApi = 'http://localhost:8090/api/private/horario';
   citaApi     = 'http://localhost:8090/api/public/cita';
@@ -41,7 +41,7 @@ export class MedicoService {
   }
   /*Esta funcion es la pepa */
   getRegistroByMedicoYClinica(medicoId: number, clinicaId: number): Observable<number>{
-    return this.http.get<number>(this.registroApi+'/buscar2/'+medicoId+'/'+clinicaId)
+    return this.http.get<number>(this.registroApi+'/buscar2/'+medicoId+'/'+clinicaId, {headers: this.headers_obj})
   }
 
   getClinicasMedico(): Observable<Clinica>{
@@ -53,7 +53,7 @@ export class MedicoService {
   }
 
   postRegistroClinicaMedico(registro: FormularioRegistroClinica): Observable<any>{
-    return this.http.post(this.registroApi, registro);
+    return this.http.post(this.registroApi, registro, {headers: this.headers_obj});
   }
 
   /*Esta seccion esta dedicada a los horarios */
@@ -67,6 +67,10 @@ export class MedicoService {
   
   deleteHorario(horarioId: number): Observable<any>{
     return this.http.post(this.horariosApi+'/delete',horarioId, {headers: this.headers_obj});
+  }
+
+  deleteRegistroClinica(regId: number): Observable<any>{
+    return this.http.post(this.registroApi+'/delete', regId, {headers: this.headers_obj});
   }
 
 }
