@@ -9,8 +9,8 @@
     <ion-item-sliding *ngFor="let item of clinicas">
       <ion-item class="ion-text-center">
         <img class="center" src="../../../assets/app/clinica.png" (click)="verHorario(item.clinicaId)"/>
-        <ion-label position="stacked">{{item.nombreClinica}}</ion-label>
-        <ion-label color="medium" position="stacked">
+        <ion-label position="stacked" (click)="verHorario(item.clinicaId)">{{item.nombreClinica}}</ion-label>
+        <ion-label color="medium" position="stacked" (click)="verHorario(item.clinicaId)">
           
           <p><ion-icon name="location-outline" color="medium">
           </ion-icon>{{item.direccionClinicas[0].direccion?.ciudad}}</p>
