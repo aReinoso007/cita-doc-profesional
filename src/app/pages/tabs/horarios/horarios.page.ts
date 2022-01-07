@@ -27,7 +27,7 @@ export class HorariosPage implements OnInit {
   }
 
   getClinicas(){
-    this.medicoService.getClinicasMedico().subscribe((data: Clinica)=>{
+    this.medicoService.getClinicasMedico().subscribe(data=>{
         this.clinicas = JSON.parse(JSON.stringify(data));
     });
   }
@@ -38,13 +38,16 @@ export class HorariosPage implements OnInit {
 
   getHorariosClinica(clinicaId: number){
     let id = this.getRegistroId(clinicaId);
-    console.log('id '+clinicaId);
     this.medicoService.getHorariosOrdenados(clinicaId);
   }
 
   verHorario(clinicaId: string){
     const url = '/tabs/horario/'+clinicaId;
     this.router.navigate([url]);
+  }
+
+  verificarDatosEnRegistro(cliId: number){
+
   }
 
 }
