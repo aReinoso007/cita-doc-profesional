@@ -47,7 +47,7 @@ export class HorariosPage implements OnInit {
   }
 
   verificarDatosEnRegistro(cliId: number){
-
+    
   }
 
 }
