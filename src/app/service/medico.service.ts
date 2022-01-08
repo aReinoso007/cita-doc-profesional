@@ -20,7 +20,7 @@ export class MedicoService {
   registroApi = 'http://localhost:8090/api/private/registro_clinica';
   clinicasApi = 'http://localhost:8090/api/public/clinica';
   horariosApi = 'http://localhost:8090/api/private/horario';
-  citaApi     = 'http://localhost:8090/api/public/cita';
+  citaApi     = 'http://localhost:8090/api/private/cita';
   constructor(private http: HttpClient,private tokenService: TokenService) { 
     
   }
@@ -37,7 +37,7 @@ export class MedicoService {
   /*Devuelve el id del registro con el id del medico y la clinica
     esto sirve para poder listar los horarios de esa clinica, agregar, editar o borrar */
   getRegistroPorMedicoYClinica(medicoId: number, clinicaId: number): Observable<number>{
-    return this.http.get<number>(this.registroApi+'/buscar/'+medicoId+'/'+clinicaId)
+    return this.http.get<number>(this.registroApi+'/buscar/'+medicoId+'/'+clinicaId, {headers: this.headers_obj})
   }
   /*Esta funcion es la pepa */
   getRegistroByMedicoYClinica(medicoId: number, clinicaId: number): Observable<number>{
@@ -72,5 +72,11 @@ export class MedicoService {
   deleteRegistroClinica(regId: number): Observable<any>{
     return this.http.post(this.registroApi+'/delete', regId, {headers: this.headers_obj});
   }
+
+  /*Seccion de citas */
+  getTodayCitasMedico(): Observable<any>{
+    return this.http.get(this.citaApi+'/hoy/'+this.tokenService.getUserId(), {headers: this.headers_obj});
+  }
+
 
 }

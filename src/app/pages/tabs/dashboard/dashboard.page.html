@@ -10,4 +10,13 @@
   <div class="header">
     <h1 style="text-align: center;">Seccion de citas</h1>
   </div>
+  <ion-item-sliding *ngFor="let c of citas">
+    <ion-item>
+      <ion-label position="stacked">{{c.fechaCita}}</ion-label>
+      <ion-label position="stacked">{{c.estado}}</ion-label>
+    </ion-item>
+    <ion-item-options>
+      <ion-item-option color="danger">Cancelar</ion-item-option>
+    </ion-item-options>
+  </ion-item-sliding>
 </ion-content>
