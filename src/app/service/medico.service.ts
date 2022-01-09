@@ -48,8 +48,8 @@ export class MedicoService {
     return this.http.get<Clinica>(this.clinicasApi+'/medico_clinica/?idMedico='+this.tokenService.getUserId());
   }
 
-  getHistorialCitas(id: number): Observable<Cita[]>{
-    return this.http.get<Cita[]>(this.citaApi+'/historial/'+id);
+  getHistorialCitas(): Observable<Cita[]>{
+    return this.http.get<Cita[]>(this.citaApi+'/historial/'+this.tokenService.getUserId(), {headers: this.headers_obj});
   }
 
   postRegistroClinicaMedico(registro: FormularioRegistroClinica): Observable<any>{
@@ -77,6 +77,5 @@ export class MedicoService {
   getTodayCitasMedico(): Observable<any>{
     return this.http.get(this.citaApi+'/hoy/'+this.tokenService.getUserId(), {headers: this.headers_obj});
   }
-
 
 }
