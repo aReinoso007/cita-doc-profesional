@@ -48,7 +48,7 @@ export class DetallehorarioPage implements OnInit {
     let cliId: number = Number(this.clinicaId);
     this.medicoService.getRegistroByMedicoYClinica(this.tokenService.getUserId(), cliId).subscribe(res =>{
       this.medicoService.getHorariosOrdenados(res).subscribe((data)=>{
-        this.horarios = JSON.parse(JSON.stringify(data))
+        this.horarios = JSON.parse(JSON.stringify(data));
       }, error =>{
         console.log('Error ', error.message)
       });
@@ -85,4 +85,6 @@ export class DetallehorarioPage implements OnInit {
     });
     await toast.present();
   }
+
+
 }
