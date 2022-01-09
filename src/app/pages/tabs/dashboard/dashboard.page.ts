@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 })
 export class DashboardPage implements OnInit {
   medico: Medico = new Medico;
+  citas = [];
   constructor(private medicoService: MedicoService,
               private toastCtrl: ToastController,
               private router: Router) { }
@@ -20,7 +21,15 @@ export class DashboardPage implements OnInit {
     this.medicoService.getMedico().subscribe((data: Medico)=>{
       this.medico = JSON.parse(JSON.stringify(data));
     });
+    this.getTodayCitas()
     this.redirectToLogin(this.medico);
+  }
+
+  ionViewWillEnter(){
+    this.medicoService.getMedico().subscribe((data: Medico)=>{
+      this.medico = JSON.parse(JSON.stringify(data));
+    });
+    this.getTodayCitas();
   }
 
   redirectToLogin(medico: Medico){
@@ -38,6 +47,13 @@ export class DashboardPage implements OnInit {
       duration: 2000
     });
     await toast.present();
+  }
+
+  getTodayCitas(){
+    this.medicoService.getTodayCitasMedico().subscribe(data=>{
+      this.citas = JSON.parse(JSON.stringify(data));
+      console.log('citas: ', this.citas);
+    })
   }
 
 }

@@ -3,7 +3,7 @@ import { TokenService } from './../../../service/token.service';
 import { Component, OnInit } from '@angular/core';
 import { Clinica } from 'src/app/model/clinica.model';
 import { MedicoService } from 'src/app/service/medico.service';
-import { PopoverController } from '@ionic/angular';
+import { PopoverController, ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-horarios',
@@ -14,7 +14,7 @@ export class HorariosPage implements OnInit {
   clinicas: any[] =[];
   constructor(private medicoService: MedicoService,
               private tokenService: TokenService,
-              private router: Router) { }
+              private router: Router, private toastCtrl: ToastController) { }
 
   ngOnInit() {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
@@ -27,7 +27,7 @@ export class HorariosPage implements OnInit {
   }
 
   getClinicas(){
-    this.medicoService.getClinicasMedico().subscribe((data: Clinica)=>{
+    this.medicoService.getClinicasMedico().subscribe(data=>{
         this.clinicas = JSON.parse(JSON.stringify(data));
     });
   }
@@ -38,13 +38,39 @@ export class HorariosPage implements OnInit {
 
   getHorariosClinica(clinicaId: number){
     let id = this.getRegistroId(clinicaId);
-    console.log('id '+clinicaId);
     this.medicoService.getHorariosOrdenados(clinicaId);
   }
 
   verHorario(clinicaId: string){
     const url = '/tabs/horario/'+clinicaId;
     this.router.navigate([url]);
+  }
+
+  verificarDatosEnRegistro(cliId: number){
+    var hrs =[];
+    this.medicoService.getRegistroByMedicoYClinica(this.tokenService.getUserId(), cliId).subscribe(res=>{      
+      this.medicoService.getHorariosOrdenados(res).subscribe((data)=>{
+        hrs = JSON.parse(JSON.stringify(data));
+        if(hrs.length > 0){
+          this.presentToastOptions('Oops!', 'Elimine primero los registros de horario'); 
+        }else{
+          this.medicoService.deleteRegistroClinica(res).subscribe(r=>{
+            this.getClinicas(); 
+            this.presentToastOptions('¡Éxito!','Registro eliminado con éxito');     
+          });
+        }
+      });
+    })
+  }
+
+  async presentToastOptions(header: string, message: string){
+    const toast = await this.toastCtrl.create({
+      header: header,
+      message: message,
+      position: 'top',
+      duration: 2000
+    });
+    await toast.present();
   }
 
 }
