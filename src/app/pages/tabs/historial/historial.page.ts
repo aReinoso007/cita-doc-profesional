@@ -24,7 +24,6 @@ export class HistorialPage implements OnInit {
   getHistorial(){
     this.medicoService.getHistorialCitas().subscribe((data: Cita[])=>{
       this.historialCitas = JSON.parse(JSON.stringify(data));
-      console.log('todas las citas: ', this.historialCitas);
     })
   }
 
