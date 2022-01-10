@@ -53,7 +53,6 @@ export class AdddireccionPage implements OnInit {
       direccionId = JSON.parse(JSON.stringify(res));
       this.formularioRegistro = new FormularioDireccionClinica(Number(this.clinicaId), direccionId);
       this.clinicaService.addRegistroDireccion(this.formularioRegistro).subscribe(res=>{
-        console.log('direccion clinica res: ', res);
       }, error=>{
         if(error.status == 201){
           this.formularioRegistro =null;
@@ -79,7 +78,7 @@ export class AdddireccionPage implements OnInit {
     }else{
       this.saveDireccion();
       this.direccionForm.reset();
-      this.router.navigateByUrl('/tabs/clinicas');
+      this.router.navigateByUrl('/tabs/horario');
     }
   }
   

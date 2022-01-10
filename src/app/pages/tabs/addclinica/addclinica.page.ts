@@ -90,7 +90,6 @@ export class AddclinicaPage implements OnInit {
     this.clinicaService.getClinicasDisponibles(this.tokenService.getUserId()).subscribe((data:Clinica[])=>{
       this.clinicas = JSON.parse(JSON.stringify(data));
     }, error =>{
-      console.log('Error response: ', error.status);
     })
   }
 

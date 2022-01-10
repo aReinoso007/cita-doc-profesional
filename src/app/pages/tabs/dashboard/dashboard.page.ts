@@ -14,8 +14,10 @@ export class DashboardPage implements OnInit {
   medico: Medico = new Medico;
   citas = [];
   constructor(private medicoService: MedicoService,
-              private toastCtrl: ToastController,
-              private router: Router) { }
+  private toastCtrl: ToastController,
+  private router: Router) { 
+                
+  }
 
   ngOnInit() {
     this.medicoService.getMedico().subscribe((data: Medico)=>{
@@ -52,8 +54,17 @@ export class DashboardPage implements OnInit {
   getTodayCitas(){
     this.medicoService.getTodayCitasMedico().subscribe(data=>{
       this.citas = JSON.parse(JSON.stringify(data));
-      console.log('citas: ', this.citas);
-    })
+    });
+  }
+
+  recargar(event){
+    setTimeout(() => {
+      this.medicoService.getMedico().subscribe((data: Medico)=>{
+        this.medico = JSON.parse(JSON.stringify(data));
+      });
+      this.getTodayCitas();
+      event.target.complete();
+    }, 2000);
   }
 
 }
