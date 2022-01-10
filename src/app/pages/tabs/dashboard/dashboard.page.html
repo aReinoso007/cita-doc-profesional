@@ -1,10 +1,10 @@
 <ion-content color="light">
   <ion-card>
     <ion-avatar color="light">
-      <img src="../../../../assets/app/medic.png">
+      <img [routerLink]="['/tabs/cuenta/detalle']" src="../../../../assets/app/medic.png">
     </ion-avatar>
     <ion-icon name="information-outline"></ion-icon>
-    <ion-label>{{medico.nombre}} {{medico.apellido}}</ion-label>
+    <ion-label >{{medico.nombre}} {{medico.apellido}}</ion-label>
     <h3>{{medico.profesion}}</h3>
   </ion-card>
   <div class="header">

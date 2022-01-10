@@ -19,7 +19,7 @@ export class LoginPage implements OnInit {
   constructor(
     private authService: AuthService,
     private tokenService: TokenService,
-    private toastController: ToastController,
+    private toastCtrl: ToastController,
     private medicoService: MedicoService,
     private router: Router
   ) { }
@@ -30,17 +30,18 @@ export class LoginPage implements OnInit {
 
   onLogin(){
     this.login = new Login(this.email, this.password);
-    console.log('login ', this.login);
     this.authService.login(this.login).subscribe(
       data=>{
-        console.log('data', data);
-        console.log('dataToken: ',data.token);
         this.tokenService.setToken(data.token);
         this.router.navigateByUrl('/tabs/dashboard');
       },
       err=>{
+        if(err.status === 401){
+          this.presentToastOptions('¡Oops!','Los datos son incorrectos');  
+        }
+        console.log('error status: ', err.status)
         this.errMessage = err.error.message;
-        this.presentToast();
+        
       }
     )
   }
@@ -49,13 +50,14 @@ export class LoginPage implements OnInit {
     
   }
 
-  async presentToast() {
-    const toast = await this.toastController.create({
-      message: this.errMessage,
-      duration: 2000,
-      position:'middle'
+  async presentToastOptions(header: string, message: string){
+    const toast = await this.toastCtrl.create({
+      header: header,
+      message: message,
+      position: 'top',
+      duration: 2000
     });
-    toast.present();
+    await toast.present();
   }
 
   verifyUserSignedin(){
@@ -66,7 +68,7 @@ export class LoginPage implements OnInit {
         this.router.navigateByUrl('/login');
       } 
     } catch (error) {
-      console.log('No se ha hecho sesion');
+      
     }
   }
     

@@ -52,7 +52,6 @@ export class DashboardPage implements OnInit {
   getTodayCitas(){
     this.medicoService.getTodayCitasMedico().subscribe(data=>{
       this.citas = JSON.parse(JSON.stringify(data));
-      console.log('citas: ', this.citas);
     })
   }
 
