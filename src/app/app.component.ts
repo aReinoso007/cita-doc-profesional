@@ -36,18 +36,29 @@ export class AppComponent implements OnInit, OnDestroy{
         }
 
         //Desactivar tabs con id
-        if(event['url'].indexOf('/tabs/clinicas') !== -1){
+        if(event['url'].indexOf('/tabs/clinicas/') !== -1){
           const tabBar = document.getElementById('myTabBar'); tabBar.style.display = 'none'
         }
         if(event['url'].indexOf('/tabs/horario/') !== -1){
           const tabBar = document.getElementById('myTabBar'); tabBar.style.display = 'none'
         }
 
+
+
         if(event['url'] === '/tabs/clinicas'){
           const tabBar = document.getElementById('myTabBar'); tabBar.style.display = 'none'
         }
         if(event['url'].indexOf('/tabs/horario')){
           const tabBar = document.getElementById('myTabBar'); tabBar.style.display = 'none'
+        }
+        if(event['url'] === '/tabs/historial'){
+          const tabBar = document.getElementById('myTabBar'); tabBar.style.display = 'flex'
+        }
+        if(event['url'] === '/tabs/dashboard'){
+          const tabBar = document.getElementById('myTabBar'); tabBar.style.display = 'flex'
+        }
+        if(event['url'] === '/tabs/cuenta'){
+          const tabBar = document.getElementById('myTabBar'); tabBar.style.display = 'flex'
         }
 
 
