@@ -42,15 +42,23 @@ export class AppComponent implements OnInit, OnDestroy{
         if(event['url'].indexOf('/tabs/horario/') !== -1){
           const tabBar = document.getElementById('myTabBar'); tabBar.style.display = 'none'
         }
-
+        if(event['url'].indexOf('/tabs/cuenta/especialidades/') !== -1){
+          const tabBar = document.getElementById('myTabBar'); tabBar.style.display = 'none'
+        }
+    
 
 
         if(event['url'] === '/tabs/clinicas'){
           const tabBar = document.getElementById('myTabBar'); tabBar.style.display = 'none'
         }
-        if(event['url'].indexOf('/tabs/horario')){
+        if(event['url'] === '/tabs/cuenta/detalle'){
           const tabBar = document.getElementById('myTabBar'); tabBar.style.display = 'none'
         }
+        if(event['url'] === '/tabs/cuenta/especialidades'){
+          const tabBar = document.getElementById('myTabBar'); tabBar.style.display = 'none'
+        }
+
+        
         if(event['url'] === '/tabs/historial'){
           const tabBar = document.getElementById('myTabBar'); tabBar.style.display = 'flex'
         }
