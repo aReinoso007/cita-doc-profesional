@@ -73,4 +73,12 @@ export class HorariosPage implements OnInit {
     await toast.present();
   }
 
+  recargar(event){
+    setTimeout(() => {
+    
+      this.getClinicas();
+      event.target.complete();
+    }, 2000);
+  }
+
 }

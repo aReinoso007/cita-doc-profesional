@@ -6,6 +6,9 @@
   </ion-fab>
   <ion-grid>
     <h1 style="text-align: center;">Mis Clínicas</h1>
+    <ion-refresher slot="fixed" (ionRefresh)="recargar($event)">
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
     <ion-item-sliding *ngFor="let item of clinicas">
       <ion-item class="ion-text-center">
         <img class="center" src="../../../assets/app/clinica.png" (click)="verHorario(item.clinicaId)"/>
