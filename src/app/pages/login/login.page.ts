@@ -32,10 +32,12 @@ export class LoginPage implements OnInit {
     this.login = new Login(this.email, this.password);
     this.authService.login(this.login).subscribe(
       data=>{
+        this.tokenService.logOut();
         this.tokenService.setToken(data.token);
         this.router.navigateByUrl('/tabs/dashboard');
       },
       err=>{
+        console.log('estatus: ', err.status);
         if(err.status === 401){
           this.presentToastOptions('¡Oops!','Los datos son incorrectos');  
         }
