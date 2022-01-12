@@ -10,10 +10,14 @@ import { RegistroSubespecialidad } from '../model/RegistroSubespecialidad.model'
 })
 export class AcademiaService {
 
-  especialidadAPI ='http://localhost:8090/api/private/especialidad';
-  subespecialidadAPI ='http://localhost:8090/api/public/subespecialidad';
-  registroEspeAPI='http://localhost:8090/api/private/medico_especialidad';
-  registroSubEsAPI='http://localhost:8090/api/private/medico_subespecialidad';
+  //especialidadAPI ='http://localhost:8090/api/private/especialidad';
+  //subespecialidadAPI ='http://localhost:8090/api/public/subespecialidad';
+  //registroEspeAPI='http://localhost:8090/api/private/medico_especialidad';
+  //registroSubEsAPI='http://localhost:8090/api/private/medico_subespecialidad';
+  especialidadAPI ='http://citadoc-env-1.eba-tere2tz5.sa-east-1.elasticbeanstalk.com/api/private/especialidad';
+  subespecialidadAPI ='http://citadoc-env-1.eba-tere2tz5.sa-east-1.elasticbeanstalk.com/api/public/subespecialidad';
+  registroEspeAPI='http://citadoc-env-1.eba-tere2tz5.sa-east-1.elasticbeanstalk.com/api/private/medico_especialidad';
+  registroSubEsAPI='http://citadoc-env-1.eba-tere2tz5.sa-east-1.elasticbeanstalk.com/api/private/medico_subespecialidad';
 
   constructor(
     private tokenService: TokenService,

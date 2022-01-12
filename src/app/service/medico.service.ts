@@ -16,11 +16,16 @@ import { FormularioRegistroClinica } from '../model/formularioRegistroClinica.mo
 
 
 export class MedicoService {
-  medicoApi   = 'http://localhost:8090/api/private/medico';
-  registroApi = 'http://localhost:8090/api/private/registro_clinica';
-  clinicasApi = 'http://localhost:8090/api/public/clinica';
-  horariosApi = 'http://localhost:8090/api/private/horario';
-  citaApi     = 'http://localhost:8090/api/private/cita';
+  //medicoApi   = 'http://localhost:8090/api/private/medico';
+  //registroApi = 'http://localhost:8090/api/private/registro_clinica';
+  //clinicasApi = 'http://localhost:8090/api/public/clinica';
+  //horariosApi = 'http://localhost:8090/api/private/horario';
+  //citaApi     = 'http://localhost:8090/api/private/cita';
+  medicoApi   = 'http://citadoc-env-1.eba-tere2tz5.sa-east-1.elasticbeanstalk.com/api/private/medico';
+  registroApi = 'http://citadoc-env-1.eba-tere2tz5.sa-east-1.elasticbeanstalk.com/api/private/registro_clinica';
+  clinicasApi = 'http://citadoc-env-1.eba-tere2tz5.sa-east-1.elasticbeanstalk.com/api/private/clinica';
+  horariosApi = 'http://citadoc-env-1.eba-tere2tz5.sa-east-1.elasticbeanstalk.com/api/private/horario';
+  citaApi     = 'http://citadoc-env-1.eba-tere2tz5.sa-east-1.elasticbeanstalk.com/api/private/cita';
   constructor(private http: HttpClient,private tokenService: TokenService) { 
     
   }
@@ -45,7 +50,7 @@ export class MedicoService {
   }
 
   getClinicasMedico(): Observable<Clinica>{
-    return this.http.get<Clinica>(this.clinicasApi+'/medico_clinica/?idMedico='+this.tokenService.getUserId());
+    return this.http.get<Clinica>(this.clinicasApi+'/medico_clinica/?idMedico='+this.tokenService.getUserId(), {headers: this.headers_obj});
   }
 
   getHistorialCitas(): Observable<Cita[]>{

@@ -8,8 +8,10 @@ import { Clinica } from '../model/clinica.model';
   providedIn: 'root'
 })
 export class ClinicaService {
-  clinicasApi = 'http://localhost:8090/api/public/clinica';
-  registroDireccionAPI = 'http://localhost:8090/api/public/direccion_clinica';
+  /*clinicasApi = 'http://localhost:8090/api/public/clinica';
+  registroDireccionAPI = 'http://localhost:8090/api/public/direccion_clinica';*/
+  clinicasApi = 'http://citadoc-env-1.eba-tere2tz5.sa-east-1.elasticbeanstalk.com/api/private/clinica';
+  registroDireccionAPI = 'http://citadoc-env-1.eba-tere2tz5.sa-east-1.elasticbeanstalk.com/api/public/direccion_clinica';
   constructor(
     private http: HttpClient
   ) { }
