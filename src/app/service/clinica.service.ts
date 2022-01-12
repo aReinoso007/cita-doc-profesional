@@ -28,7 +28,7 @@ export class ClinicaService {
   }
 
   addClinica(clinica: Clinica): Observable<any>{
-    return this.http.post(this.clinicasApi, clinica);
+    return this.http.post(this.clinicasApi, clinica, {headers: this.headers_obj});
   }
 
   addRegistroDireccion(registro: FormularioDireccionClinica): Observable<any>{
