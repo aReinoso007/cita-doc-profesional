@@ -4,6 +4,7 @@ import { TokenService } from './../../../service/token.service';
 import { MedicoService } from './../../../service/medico.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Cita } from 'src/app/model/cita.model';
 
 @Component({
   selector: 'app-dashboard',
@@ -52,7 +53,7 @@ export class DashboardPage implements OnInit {
   }
 
   getTodayCitas(){
-    this.medicoService.getTodayCitasMedico().subscribe(data=>{
+    this.medicoService.getTodayCitasMedico().subscribe((data: Cita)=>{
       this.citas = JSON.parse(JSON.stringify(data));
     });
   }
