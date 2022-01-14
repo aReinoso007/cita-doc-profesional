@@ -9,10 +9,9 @@
   </ion-toolbar>
 </ion-header>
 <ion-content color="light">
-  <swiper #swiper [config]="config" [pagination]="{ clickable: true }" >
-    <ng-template swiperSlide >
+    <div *ngIf="this.submitted1 ===false">
       <form [formGroup]="signupForm" (ngSubmit)="onSubmit1()">
-        <h3>Datos Personales</h3>
+        <h3 style="text-align: center;">Datos Personales</h3>
         <ion-item>
           <ion-label position="floating">Nombre</ion-label>
           <ion-input formControlName="nombre" type="text"  [(ngModel)]="medico.nombre"></ion-input>
@@ -74,14 +73,15 @@
 
         <ion-row>
           <ion-col>
-            <ion-button type="submit" color="success" expand="block"><ion-text>Desliza -></ion-text></ion-button>
+            <ion-button type="submit" color="success" expand="block" [disabled]="!signupForm.valid"><ion-text>Siguiente</ion-text></ion-button>
           </ion-col>
         </ion-row>
       </form>
-    </ng-template>
-    <ng-template swiperSlide>
+    </div>
+
+    <div *ngIf="this.submitted1 === true">
       <form [formGroup]="signupForm2" (ngSubmit)="onSubmit2()">
-        <h3>Cuentanos sobre ti</h3>
+        <h3 style="text-align: center;">Cuentanos sobre ti</h3>
         <ion-item>
           <ion-label position="floating">Profesion</ion-label>
           <ion-input formControlName="profesion" type="text" [(ngModel)]="medico.profesion"></ion-input>
@@ -112,22 +112,12 @@
         </span>
         <ion-row>
           <ion-col>
-            <ion-button type="submit" color="success" expand="block">Registrar</ion-button>
+            <ion-button color="danger" expand="block" (click)="regresar()">Regresar</ion-button>
+          </ion-col>
+          <ion-col>
+            <ion-button type="submit" color="success" expand="block" [disabled]="!signupForm2.valid">Registrar</ion-button>
           </ion-col>
         </ion-row>
       </form>
-    </ng-template>
-  </swiper>
+    </div>
 </ion-content>
-<!-- 
-  <ion-footer>
-  <ion-button
-    expand="full"
-    color="success"
-    routerLink="/"
-    routerDirection="forward"
-  >
-  Siguiente <ion-icon name="chevron-forward-outline"></ion-icon>
-  </ion-button>
-</ion-footer>
--->

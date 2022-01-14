@@ -8,6 +8,7 @@ import Swiper, { SwiperOptions } from 'swiper';
 import SwiperCore, { Navigation, Pagination} from 'swiper';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
+import { IonSlides } from '@ionic/angular';
 
 SwiperCore.use([Pagination, Navigation])
 @Component({
@@ -18,12 +19,8 @@ SwiperCore.use([Pagination, Navigation])
 })
 export class RegistroPage implements OnInit{
 
-  @ViewChild('swiper') swiper: SwiperComponent; 
+  @ViewChild(IonSlides)slides: IonSlides;
   @ViewChild('passwordEyeRegister') passwordEye;
-  config: SwiperOptions = {
-    slidesPerView: 1,
-    pagination: true
-  }; 
   passwordTypeInput  =  'password';
   iconpassword  =  'eye-off';
   message = '';
@@ -35,9 +32,6 @@ export class RegistroPage implements OnInit{
   submitted2 = false;
 
   ngOnInit(){
-    if(this.swiper){
-      this.swiper.updateSwiper({});
-    }
   }
 
   medico: Medico = new Medico();
@@ -53,6 +47,10 @@ export class RegistroPage implements OnInit{
     this.setUpForm2();
   }
 
+  mySlideOptions = {
+    pager:true
+  };
+
   setUpForm1(){
     this.signupForm = this.formBuilder.group({
       nombre: new FormControl('', Validators.required),
@@ -65,10 +63,6 @@ export class RegistroPage implements OnInit{
         Validators.minLength(8),
         Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]+$')
       ])),
-      descripcion: new FormControl('', Validators.required),
-      numeroContacto: new FormControl('', [Validators.required, Validators.maxLength(10)]),
-      profesion: new FormControl('', Validators.required),
-      slogan: new FormControl('', [Validators.required, Validators.maxLength(200)])
     });
   }
 
@@ -82,14 +76,13 @@ export class RegistroPage implements OnInit{
   }
 
   onSubmit1(){
-    this.submitted1 = true;
     if(!this.signupForm.valid){
       this.presentToastOptions('Error', 'Debe llenar el formulario');
-      this.submitted1 = false;
     }else{
-      this.swiper.s_slideNextTransitionEnd;
+      this.submitted1 = true;
     }
-  }  
+  }
+  
 
   get errCtrl1(){
     return this.signupForm.controls;
@@ -97,6 +90,10 @@ export class RegistroPage implements OnInit{
 
   get errCtrl2(){
     return this.signupForm2.controls;
+  }
+
+  regresar(){
+    this.submitted1 = false;
   }
 
   async onSubmit2(){

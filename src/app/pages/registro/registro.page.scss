@@ -1,19 +1,17 @@
-@import "~swiper/scss";
-@import "~@ionic/angular/css/ionic-swiper";
-
-.swiper {
-  width: 100%;
-  height: 95%;
-  padding-left: 0%;
-  padding-right: 0%;
-  padding-left: 0%;
-  padding-right: 0%;
+ion-content {
+  --background: #0081ca;
+  ion-input {
+    border-radius: 25%;
+  }
 }
-.swiper-slides {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+
+ion-slides {
+  height: 80%;
+  width: 100%;
+  padding-left: 0%;
+  padding-right: 0%;
+  --bullet-background-active: rgb(0, 0, 0);
+  --bullet-background: #000;
 }
 
 ion-text {
