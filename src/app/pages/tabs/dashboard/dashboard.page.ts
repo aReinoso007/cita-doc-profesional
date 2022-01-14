@@ -5,6 +5,7 @@ import { MedicoService } from './../../../service/medico.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Cita } from 'src/app/model/cita.model';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-dashboard',
@@ -53,8 +54,9 @@ export class DashboardPage implements OnInit {
   }
 
   getTodayCitas(){
-    this.medicoService.getTodayCitasMedico().subscribe((data: Cita)=>{
-      this.citas = JSON.parse(JSON.stringify(data));
+    this.medicoService.getTodayCitasMedico().subscribe((data)=>{
+      this.citas = JSON.parse(JSON.stringify(data), this.dateTimeReviver);
+      
     });
   }
 
@@ -66,6 +68,16 @@ export class DashboardPage implements OnInit {
       this.getTodayCitas();
       event.target.complete();
     }, 2000);
+  }
+
+  dateTimeReviver = function(key, value){
+    var a;
+    if(typeof value === 'string'){
+      if(a){
+        return new Date(+a[1])
+      }
+    }
+    return value;
   }
 
 }

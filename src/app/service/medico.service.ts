@@ -16,16 +16,12 @@ import { FormularioRegistroClinica } from '../model/formularioRegistroClinica.mo
 
 
 export class MedicoService {
-  //medicoApi   = 'http://localhost:8090/api/private/medico';
-  //registroApi = 'http://localhost:8090/api/private/registro_clinica';
-  //clinicasApi = 'http://localhost:8090/api/public/clinica';
-  //horariosApi = 'http://localhost:8090/api/private/horario';
-  //citaApi     = 'http://localhost:8090/api/private/cita';
-  medicoApi   = 'http://citadoc-env-1.eba-tere2tz5.sa-east-1.elasticbeanstalk.com/api/private/medico';
-  registroApi = 'http://citadoc-env-1.eba-tere2tz5.sa-east-1.elasticbeanstalk.com/api/private/registro_clinica';
-  clinicasApi = 'http://citadoc-env-1.eba-tere2tz5.sa-east-1.elasticbeanstalk.com/api/private/clinica';
-  horariosApi = 'http://citadoc-env-1.eba-tere2tz5.sa-east-1.elasticbeanstalk.com/api/private/horario';
-  citaApi     = 'http://citadoc-env-1.eba-tere2tz5.sa-east-1.elasticbeanstalk.com/api/private/cita';
+  medicoApi   = 'http://www.citasmedicaspepitas.info/api/private/medico';
+  registroApi = 'http://www.citasmedicaspepitas.info/api/private/registro_clinica';
+  clinicasApi = 'http://www.citasmedicaspepitas.info/api/private/clinica';
+  horariosApi = 'http://www.citasmedicaspepitas.info/api/private/horario';
+  //citaApi     = 'http://localhost:5000/api/private/cita';
+  citaApi     = 'http://www.citasmedicaspepitas.info/api/private/cita';
   constructor(private http: HttpClient,private tokenService: TokenService) { 
     
   }
@@ -53,8 +49,8 @@ export class MedicoService {
     return this.http.get<Clinica>(this.clinicasApi+'/medico_clinica/?idMedico='+this.tokenService.getUserId(), {headers: this.headers_obj});
   }
 
-  getHistorialCitas(): Observable<Cita[]>{
-    return this.http.get<Cita[]>(this.citaApi+'/historial/'+this.tokenService.getUserId(), {headers: this.headers_obj});
+  getHistorialCitas(): Observable<any[]>{
+    return this.http.get<any[]>(this.citaApi+'/historial/'+this.tokenService.getUserId(), {headers: this.headers_obj});
   }
 
   postRegistroClinicaMedico(registro: FormularioRegistroClinica): Observable<any>{
@@ -79,8 +75,8 @@ export class MedicoService {
   }
 
   /*Seccion de citas */
-  getTodayCitasMedico(): Observable<any>{
-    return this.http.get(this.citaApi+'/hoy/'+this.tokenService.getUserId(), {headers: this.headers_obj});
+  getTodayCitasMedico(): Observable<any[]>{
+    return this.http.get<any[]>(this.citaApi+'/hoy/'+this.tokenService.getUserId(), {headers: this.headers_obj});
   }
 
 }

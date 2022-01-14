@@ -37,12 +37,8 @@ export class LoginPage implements OnInit {
         this.router.navigateByUrl('/tabs/dashboard');
       },
       err=>{
-        console.log('estatus: ', err.status);
-        if(err.status === 401){
-          this.presentToastOptions('¡Oops!','Los datos son incorrectos');  
-        }
+        this.presentToastOptions('¡Oops!','Los datos son incorrectos');  
         console.log('error status: ', err.status)
-        this.errMessage = err.error.message;
         
       }
     )
@@ -65,12 +61,12 @@ export class LoginPage implements OnInit {
   verifyUserSignedin(){
     try {
       if(this.tokenService.getUserId() != null && this.medicoService.getMedico()!=null){
-        this.router.navigateByUrl('/tabs/dashboad')
+        this.router.navigateByUrl('/tabs/dashboard')
       } else if (this.medicoService.getMedico()==null){
         this.router.navigateByUrl('/login');
       } 
     } catch (error) {
-      
+      this.presentToastOptions('!Hola!','Bienvenido');
     }
   }
     
