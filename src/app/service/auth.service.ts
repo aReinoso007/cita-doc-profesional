@@ -12,7 +12,7 @@ import { Medico } from '../model/medico.model';
 export class AuthService {
 
   //authURL = 'http://localhost:8090/api/auth/';
-  authURL = 'http://citadoc-env-1.eba-tere2tz5.sa-east-1.elasticbeanstalk.com/api/auth/';
+  authURL = 'http://www.citasmedicaspepitas.info//api/auth/';
   constructor(private http: HttpClient) { }
 
   public login(login: Login): Observable<Jwt>{

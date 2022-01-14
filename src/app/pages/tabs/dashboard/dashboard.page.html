@@ -15,8 +15,10 @@
   </ion-refresher>
   <ion-item-sliding *ngFor="let c of citas">
     <ion-item>
-      <ion-label position="stacked">{{c.fechaCita}}</ion-label>
-      <ion-label position="stacked">{{c.estado}}</ion-label>
+      <ion-label position="stacked">Fecha de cita: {{c.fechaCita}}</ion-label>
+      <ion-label position="stacked">Estado: {{c.estado}}</ion-label>
+      <ion-label position="stacked">Paciente: {{c.paciente}}</ion-label>
+      <ion-label position="stacked">Clínica: {{c.clinica}}</ion-label>
     </ion-item>
   </ion-item-sliding>
 </ion-content>

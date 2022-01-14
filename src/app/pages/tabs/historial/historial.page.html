@@ -4,8 +4,9 @@
     <ion-item-sliding *ngFor="let h of historialCitas">
         <ion-item>
             <ion-label position="stacked">Estado: {{h.estado}}</ion-label>
-            <ion-label position="stacked">Fecha: {{h.fechaCita}}</ion-label>
+            <ion-label position="stacked">Fecha de cita: {{h.fechaCita}}</ion-label>
             <ion-label position="stacked"><p>Sintomas: {{h.sintomas}}</p></ion-label>
+            <ion-label position="stacked"><p>Paciente: {{h.paciente}}</p></ion-label>
         </ion-item>
     </ion-item-sliding>
 </ion-content>
